@@ -1,7 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+:root {
+    /* couleurs */
+    --background-color: #282145;
+    --red-color: #ff4040;
+    --green-color: #6bd653;
+    --red-shadow: #af2929;
+    --green-shadow: #479238;
+
+    /* variables */
+    --hauteur-bouton: 12px;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
 }
 
 .wrapper {
@@ -12,14 +25,46 @@ body {
     justify-content: center;
 }
 
+h1 {
+    text-align: center;
+    color: white;
+}
+
 .buttons {
     padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 
-h1 {
-    text-align: center;
+.bouton {
+    color: white;
+    padding: 15px;
+    border-radius: 25px;
 }
+
+.ouvrir {
+    background-color: var(--green-color);
+    box-shadow: 0 var(--hauteur-bouton) var(--green-shadow);
+}
+
+.fermer {
+    background-color: var(--red-color);
+    box-shadow: 0 var(--hauteur-bouton) var(--red-shadow);
+}
+
+.bouton:focus {
+    box-shadow: 0 0;
+    transform: translateY(var(--hauteur-bouton));
+}
+
+.ouvrir:focus {
+    background-color: var(--green-shadow);
+}
+
+.fermer:focus {
+    background-color: var(--red-shadow);
+}
+
+/* ajout animation vrai click */
