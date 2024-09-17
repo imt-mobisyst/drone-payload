@@ -17,3 +17,5 @@ UV projet de P1, pour des FISE 2025 en CI3
     - [OSDK](doc/SDK/OSDK.md)
   - [Modèles 3D](doc/3D.md)
   - [Payload](doc/Payload.md)
+
+*Remarque* : Les différentes commandes présentes dans la documentation sont à exécuter sur un système Linux.
