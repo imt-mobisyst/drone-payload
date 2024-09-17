@@ -20,18 +20,12 @@ body {
     background-color: var(--background-color);
 }
 
-.wrapper {
+.timer-wrapper {
     width: 100%;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-h1 {
-    text-align: center;
-    color: white;
-    margin-bottom: 30px;
 }
 
 .timer-container {
@@ -51,12 +45,6 @@ h1 {
     margin-right: 20px;
     font-weight: bold;
     letter-spacing: 2px;
-}
-
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
 }
 
 .bouton {
@@ -88,11 +76,6 @@ h1 {
     box-shadow: 0 var(--hauteur-bouton) var(--red-shadow);
 }
 
-.bouton.son {
-    background-color: var(--blue-color);
-    box-shadow: 0 var(--hauteur-bouton) var(--blue-shadow);
-}
-
 .bouton:hover {
     transform: translateY(-3px);
 }
@@ -114,15 +97,14 @@ h1 {
     background-color: var(--red-shadow);
 }
 
-.bouton.son:hover, .bouton.son:active {
-    background-color: var(--blue-shadow);
-}
-
 .logo {
+    display: flex;
+    justify-content: center;
     max-width: 150px;
     height: auto;
     object-fit: contain;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .modal {
@@ -154,7 +136,7 @@ h1 {
     gap: 20px;
 }
 
-.modalMessage {
+.modal-message {
     color: rgb(255, 255, 255);
     font-size: 1.4em;
     margin-bottom: 20px;
