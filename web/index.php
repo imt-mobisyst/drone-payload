@@ -10,12 +10,19 @@
 
 <body>
 
-    <div class="timer-wrapper">
-        <img src="dist/images/parasite.png" alt="Parasite Logo" class="logo">
+    <div class="wrapper">
+
+        <div class="logo-container">
+            <img src="dist/images/parasite.png" class="logo" alt="Parasite Logo" class="logo">
+        </div>
+
         <div class="timer-container">
-            <div id="timer">00:00:00</div>
+            <div class="time-label">
+                <p>Timer (s):</p>
+                <span id="timer">00</span>
+            </div>
             <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
-                <img src="dist/images/refresh.svg" style="width:60px;color:white;" />
+                <img src="dist/images/refresh.svg" style="width:60px;:red;" />
             </a>
         </div>
 
@@ -24,9 +31,9 @@
             <p>Pumping...</p>
         </div>
 
-        <div style="display: flex; justify-content: center; gap: 30px;">
+        <div class="button-list">
             <a class="bouton ouvrir" href="#" onclick="confirmStartTimer(); return false;">
-                <img src="dist/images/open_in_browser.svg" style="width:100px;color:white;" />
+                <img src="dist/images/open_in_browser.svg" style="width:100px;" />
             </a>
             <a class="bouton fermer" href="#" onclick="confirmStopTimer(); return false;">
                 <img src="dist/images/block.svg" style="width:100px;color:white;" />
@@ -36,7 +43,7 @@
 
     <div id="confirmation-modal" class="modal">
         <div class="modal-content">
-            <img id="modal-title" src="dist/images/not_started.svg" style="width:60px;color:white;" /> 
+            <img id="modal-title" src="dist/images/not_started.svg" style="width:60px;color:white;" />
             <p id="modal-message" class="modal-message"></p>
             <div class="modal-buttons">
                 <a href="#" class="bouton ouvrir" onclick="confirmAction(); return false;">Yes</a>
@@ -45,7 +52,7 @@
         </div>
     </div>
 
-    <script src="dist/script.js"></script>
+    <script src="dist/index.js"></script>
 </body>
 
 </html>
