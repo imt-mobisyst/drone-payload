@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
 :root {
     --background-color: #282145;
     --red-color: #ff4040;
@@ -16,7 +14,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: Arial, sans-serif;
     background-color: var(--background-color);
 }
 
@@ -85,15 +83,18 @@ body {
     box-shadow: none;
 }
 
-.bouton.reset:hover, .bouton.reset:active {
+.bouton.reset:hover,
+.bouton.reset:active {
     background-color: var(--orange-shadow);
 }
 
-.bouton.ouvrir:hover, .bouton.ouvrir:active {
+.bouton.ouvrir:hover,
+.bouton.ouvrir:active {
     background-color: var(--green-shadow);
 }
 
-.bouton.fermer:hover, .bouton.fermer:active {
+.bouton.fermer:hover,
+.bouton.fermer:active {
     background-color: var(--red-shadow);
 }
 
@@ -115,7 +116,7 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal-content {
@@ -162,6 +163,11 @@ body {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
