@@ -7,12 +7,12 @@ let loadingMessage = document.getElementById('loading-message');
 
 function confirmStartTimer() {
     confirmActionType = "start";
-    openModal("not_started", "Do you want to start the pump ?");
+    openModal("dist/images/not_started.svg", "Do you want to start the pump ?");
 }
 
 function confirmStopTimer() {
     confirmActionType = "stop";
-    openModal("stop_circle", "Do you want to stop the pump?");
+    openModal("dist/images/stop_circle.svg", "Do you want to stop the pump?");
 }
 
 function confirmAction() {
@@ -25,7 +25,7 @@ function confirmAction() {
 }
 
 function openModal(title, message) {
-    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-title').src = title;
     document.getElementById('modal-message').textContent = message;
     document.getElementById('confirmation-modal').style.display = 'block';
 }
