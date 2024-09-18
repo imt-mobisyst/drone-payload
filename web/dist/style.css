@@ -54,7 +54,7 @@ body {
     padding: 15px 25px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    margin: 0 20px 0 15px;
+    margin-left: 15px;
     letter-spacing: 2px;
 }
 
@@ -67,14 +67,15 @@ body {
     text-transform: uppercase;
     transition: all 0.3s ease;
     box-shadow: 0 var(--hauteur-bouton) var(--orange-shadow);
-}
-
-.bouton i {
-    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bouton.reset {
     background-color: var(--orange-color);
+    max-width: 60px;
+    width: 20%;
 }
 
 .bouton.ouvrir {
@@ -190,7 +191,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 650px) {
     .logo-container {
         width: 100%;
         max-width: none;
@@ -201,20 +202,23 @@ body {
     .logo {
         width: auto;
     }
-}
 
-@media only screen and (max-width: 600px) {
     .timer-container {
         font-size: 2rem;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .timer-container {
-        font-size: 1.5rem;
     }
 
     #timer {
         padding: 10px 15px;
+    }
+
+    .bouton {
+        padding: 5px;
+        border-radius: 15px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .timer-container {
+        font-size: 1.5rem;
     }
 }
