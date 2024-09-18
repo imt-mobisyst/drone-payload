@@ -10,6 +10,7 @@
     --orange-shadow: #cc8400;
     --timer-color: #f0f0f0;
     --timer-background: #3a3a3a;
+    --logo-color: #1B1C22;
     --hauteur-bouton: 12px;
 }
 
@@ -18,9 +19,14 @@ body {
     background-color: var(--background-color);
 }
 
+.logo {
+    padding: 15px;
+    border-radius: 20px;
+    background-color: var(--logo-color);
+}
+
 .timer-wrapper {
     width: 100%;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;

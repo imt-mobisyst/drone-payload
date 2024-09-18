@@ -11,7 +11,7 @@
 
 <body>
     <div class="timer-wrapper">
-        <img src="dist/parasite.png" alt="Parasite Logo" class="logo">
+        <img src="dist/parasite.png" class="logo" alt="Parasite Logo" class="logo">
         <div class="timer-container">
             <div id="timer">00:00:00</div>
             <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
