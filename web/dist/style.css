@@ -66,7 +66,6 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     transition: all 0.3s ease;
-    box-shadow: 0 var(--hauteur-bouton) var(--orange-shadow);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,18 +73,23 @@ body {
 
 .bouton.reset {
     background-color: var(--orange-color);
+    box-shadow: 0 var(--hauteur-bouton) var(--orange-shadow);
     max-width: 60px;
-    width: 20%;
+    width: 18%;
 }
 
 .bouton.ouvrir {
     background-color: var(--green-color);
     box-shadow: 0 var(--hauteur-bouton) var(--green-shadow);
+    max-width: 150px;
+    width: 30%;
 }
 
 .bouton.fermer {
     background-color: var(--red-color);
     box-shadow: 0 var(--hauteur-bouton) var(--red-shadow);
+    max-width: 150px;
+    width: 30%;
 }
 
 .bouton:hover {
@@ -119,7 +123,8 @@ body {
     padding: 20px;
     border-radius: 20px;
     background-color: var(--logo-color);
-    max-height: 20%;
+    height: auto;
+    width: auto;
 }
 
 .logo {
@@ -129,6 +134,8 @@ body {
 
 .modal {
     display: none;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -140,10 +147,10 @@ body {
 
 .modal-content {
     background-color: var(--background-color);
-    margin: 15% auto;
-    padding: 30px;
     border: 2px solid #ffffff;
-    width: 350px;
+    padding: 30px 0 30px 0;
+    width: 90%;
+    max-width: 350px;
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
@@ -181,6 +188,13 @@ body {
     margin-right: 10px;
 }
 
+.button-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 90%;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -197,6 +211,7 @@ body {
         max-width: none;
         padding: 5px 0 10px 0;
         border-radius: 0;
+        max-height: 20%;
     }
 
     .logo {
@@ -205,6 +220,8 @@ body {
 
     .timer-container {
         font-size: 2rem;
+        width: auto;
+        gap: 15px;
     }
 
     #timer {

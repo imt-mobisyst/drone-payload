@@ -1,13 +1,11 @@
 let timer;
 let seconds = 0;
-let minutes = 0;
-let hours = 0;
 let confirmActionType = "";
 let loadingMessage = document.getElementById('loading-message');
 
 function confirmStartTimer() {
     confirmActionType = "start";
-    openModal("dist/images/not_started.svg", "Do you want to start the pump ?");
+    openModal("dist/images/not_started.svg", "Do you want to start the pump ?"); let minutes = 0;
 }
 
 function confirmStopTimer() {
@@ -27,7 +25,7 @@ function confirmAction() {
 function openModal(title, message) {
     document.getElementById('modal-title').src = title;
     document.getElementById('modal-message').textContent = message;
-    document.getElementById('confirmation-modal').style.display = 'block';
+    document.getElementById('confirmation-modal').style.display = 'flex';
 }
 
 function closeModal() {
@@ -53,28 +51,15 @@ function stopTimer() {
 
 function resetTimer() {
     seconds = 0;
-    minutes = 0;
-    hours = 0;
     updateTimerDisplay();
 }
 
 function updateTimer() {
     seconds++;
-    if (seconds >= 60) {
-        seconds = 0;
-        minutes++;
-        if (minutes >= 60) {
-            minutes = 0;
-            hours++;
-        }
-    }
     updateTimerDisplay();
 }
 
 function updateTimerDisplay() {
-    document.getElementById('timer').textContent =
-        (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
-        (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
-        (seconds > 9 ? seconds : "0" + seconds);
+    document.getElementById('timer').textContent = seconds > 9 ? seconds : "0" + seconds;
 }
 

@@ -18,7 +18,7 @@
 
         <div class="timer-container">
             <div class="time-label">
-                <p>Timer (s) : </p>
+                <p>Timer (s):</p>
                 <span id="timer">00</span>
             </div>
             <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
@@ -31,7 +31,7 @@
             <p>Pumping...</p>
         </div>
 
-        <div style="display: flex; justify-content: center; gap: 30px;">
+        <div class="button-list">
             <a class="bouton ouvrir" href="#" onclick="confirmStartTimer(); return false;">
                 <img src="dist/images/open_in_browser.svg" style="width:100px;" />
             </a>
@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <script src="dist/script.js"></script>
+    <script src="dist/index.js"></script>
 </body>
 
 </html>
