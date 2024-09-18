@@ -13,7 +13,7 @@
     <div class="wrapper">
 
         <div class="logo-container">
-            <img src="dist/parasite.png" class="logo" alt="Parasite Logo" class="logo">
+            <img src="dist/images/parasite.png" class="logo" alt="Parasite Logo" class="logo">
         </div>
 
         <div class="timer-container">
@@ -22,7 +22,7 @@
                 <span id="timer">00</span>
             </div>
             <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
-                <img src="dist/images/refresh.svg" style="width:60px;color:white;" />
+                <img src="dist/images/refresh.svg" style="width:60px;:red;" />
             </a>
         </div>
 
@@ -33,7 +33,7 @@
 
         <div style="display: flex; justify-content: center; gap: 30px;">
             <a class="bouton ouvrir" href="#" onclick="confirmStartTimer(); return false;">
-                <img src="dist/images/open_in_browser.svg" style="width:100px;color:white;" />
+                <img src="dist/images/open_in_browser.svg" style="width:100px;" />
             </a>
             <a class="bouton fermer" href="#" onclick="confirmStopTimer(); return false;">
                 <img src="dist/images/block.svg" style="width:100px;color:white;" />
