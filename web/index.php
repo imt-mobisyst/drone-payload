@@ -10,18 +10,23 @@
 </head>
 
 <body>
+
     <div class="timer-wrapper">
+
         <img src="dist/parasite.png" class="logo" alt="Parasite Logo" class="logo">
+
         <div class="timer-container">
             <div id="timer">00:00:00</div>
             <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
                 <i class="material-icons" style="font-size:60px;color:white;">refresh</i>
             </a>
         </div>
+
         <div id="loading-message" style="display: none;">
             <div class="spinner"></div>
             <p>Pumping...</p>
         </div>
+
         <div style="display: flex; justify-content: center; gap: 30px;">
             <a class="bouton ouvrir" href="#" onclick="confirmStartTimer(); return false;">
                 <i class="material-icons" style="font-size:100px;color:white;">open_in_browser</i>
