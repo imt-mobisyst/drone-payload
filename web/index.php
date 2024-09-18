@@ -24,7 +24,7 @@
         </div>
         <div style="display: flex; justify-content: center; gap: 30px;">
             <a class="bouton ouvrir" href="#" onclick="confirmStartTimer(); return false;">
-                <!-- <i class="material-icons" style="font-size:100px;color:white;">open_in_browser</i> -->
+                <i class="material-icons" style="font-size:100px;color:white;">open_in_browser</i>
                 <i></i>
             </a>
             <a class="bouton fermer" href="#" onclick="confirmStopTimer(); return false;">
