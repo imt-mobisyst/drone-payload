@@ -11,12 +11,17 @@
 
 <body>
 
-    <div class="timer-wrapper">
+    <div class="wrapper">
 
-        <img src="dist/parasite.png" class="logo" alt="Parasite Logo" class="logo">
+        <div class="logo-container">
+            <img src="dist/parasite.png" class="logo" alt="Parasite Logo" class="logo">
+        </div>
 
         <div class="timer-container">
-            <div id="timer">00:00:00</div>
+            <div class="time-label">
+                <p>Timer (s) : </p>
+                <span id="timer">00</span>
+            </div>
             <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
                 <i class="material-icons" style="font-size:60px;color:white;">refresh</i>
             </a>
