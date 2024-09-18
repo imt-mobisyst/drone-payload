@@ -4,7 +4,7 @@ The Raspberry Pi is configured as an access point with the following access meth
 
 - SSID : M600_RPI
 - Password : M600_RPI
-- Address on own network : 10.141.3.1
+- Address on own network : 10.3.141.1
 - Config page port : 8080
 - Application page port : 80
 
