@@ -1,25 +1,41 @@
+import json
 from RPi import GPIO
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, render_template, request, flash, Response, send_from_directory
 
-PIN = 11
+PINS = {"v1": 11,"v2": 12}
+valves = {
+    "v1": {"is_open": False},
+    "v2": {"is_open": False}
+}
 
 app = Flask(__name__)
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(PIN, GPIO.OUT)
+for pin in PINS.values():
+    GPIO.setup(pin, GPIO.OUT)
 
-@app.route('/', methods=["GET", "POST"])
-def index_get():
-    if request.method == "POST": # 0 for open, any for close
+@app.route('/', methods = ["GET", "POST"])
+def index():
+    if request.method == "POST": 
         # Note : Relay is active low
-        if(request.json["action"] == 0):
-            GPIO.output(PIN, GPIO.LOW)
+        if request.json is not None and \
+        request.json["valve_nb"] is not None and \
+        request.json["open"] is not None:
+            pin = PINS[request.json["valve_nb"]]
+
+            if(request.json["open"] == True):
+                GPIO.output(pin, GPIO.LOW)
+            else:
+                GPIO.output(pin,GPIO.HIGH)
+
+            valves[request.json["valve_nb"]]["is_open"] = not GPIO.input(pin)
+
+            return json.dumps(valves)
         else:
-            GPIO.output(PIN,GPIO.HIGH)
-        return redirect(url_for('index_get'))
+            flash("Error, try again...")
+            return Response(status = 500)
     
     else:
-        pin_state = GPIO.input(PIN) 
-        return render_template('index.html.jinja', is_open=pin_state)
+        return render_template('index.html.jinja', valves=valves) 
 

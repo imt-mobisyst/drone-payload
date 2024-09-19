@@ -50,3 +50,4 @@ echo "SSH on $ip_target"
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 scp -r $SCRIPT_DIR/../web/* bot@$ip_target:/home/bot/flask_app/
+ssh bot@$ip_target "sudo systemctl restart parasiteApp.service"

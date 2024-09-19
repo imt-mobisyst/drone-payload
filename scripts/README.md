@@ -10,7 +10,7 @@ Pour exécuter un des scripts, en supposant que vous vous trouvez à la racine d
 ./scripts/<nomDuScript.sh>
 ```
 
-*Important* : Si l'exécution échoue, veillez à donner les permissions nécessaires aux fichiers :
+**Important** : Si l'exécution échoue, veillez à donner les permissions nécessaires aux fichiers :
 ```
 sudo chmod +x -R ./scripts
 ```
