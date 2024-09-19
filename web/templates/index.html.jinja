@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <title>Parasite</title>
 </head>
 
@@ -13,7 +14,8 @@
     <div class="wrapper">
 
         <div class="logo-container">
-            <img src="{{ url_for('static', filename='images/parasite.png') }}" class="logo" alt="Parasite Logo" class="logo">
+            <img src="{{ url_for('static', filename='images/parasite.png') }}" class="logo" alt="Parasite Logo"
+                class="logo">
         </div>
 
         <div class="timer-container">
@@ -46,7 +48,8 @@
 
     <div id="confirmation-modal" class="modal">
         <div class="modal-content">
-            <img id="modal-title" src="{{ url_for('static', filename='images/not_started.svg') }}" style="width:60px;color:white;" />
+            <img id="modal-title" src="{{ url_for('static', filename='images/not_started.svg') }}"
+                style="width:60px;color:white;" />
             <p id="modal-message" class="modal-message"></p>
             <div class="modal-buttons">
                 <a href="#" class="bouton ouvrir" onclick="confirmAction(); return false;">Yes</a>
