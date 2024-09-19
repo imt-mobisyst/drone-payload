@@ -1,21 +1,11 @@
 # Web
 
-Ce dossier contient les fichiers PHP générant la page web de la station et les scripts Python activant les électrovannes.
+Ce dossier contient les fichiers générant la page web de la station et les scripts Python activant les électrovannes.
+Auparavant, la page web était générée en PHP. Si vous voulez découvrir la documentation et le code source de la solution en PHP, veuillez remonter au commit taggé `php_version` : `git checkout php_version`.
 
-## Environnement en local
+## Mise en route en production
 
-Voici les étapes pour avoir un environnement de développement en local, similaire à ce qu'on retrouve dans la Raspberry Pi.
-
-### Installation de PHP
-
+Pour lancer le serveur manuellement, en étant par avance connecté à la Raspberry Pi en ssh :
 ```
-sudo apt update && sudo apt upgrade -y
-sudo apt install php -y
-```
-
-### Mise en route du serveur en local
-
-Ouvrez un terminal, placez vous dans le dossier `drone-payload/web`, et démarrez un serveur PHP en local grâce à la commande :
-```
-php -S localhost:8000
+flask --app ~/flask-app run --host 0.0.0.0
 ```
