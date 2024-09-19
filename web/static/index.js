@@ -5,20 +5,31 @@ let loadingMessage = document.getElementById('loading-message');
 
 function confirmStartTimer() {
     confirmActionType = "start";
-    openModal("dist/images/not_started.svg", "Do you want to start the pump ?"); let minutes = 0;
+    openModal("static/images/not_started.svg", "Do you want to start the pump ?"); let minutes = 0;
 }
 
 function confirmStopTimer() {
     confirmActionType = "stop";
-    openModal("dist/images/stop_circle.svg", "Do you want to stop the pump?");
+    openModal("static/images/stop_circle.svg", "Do you want to stop the pump?");
 }
 
 function confirmAction() {
     if (confirmActionType === "start") {
         startTimer();
+        action = 0
     } else if (confirmActionType === "stop") {
         stopTimer();
+        action = 1
     }
+    fetch("", {
+        method: "POST",
+        body: JSON.stringify({
+          action: action
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+    }).then(() => {window.location.reload()});
     closeModal();
 }
 
@@ -35,7 +46,7 @@ function closeModal() {
 function startTimer() {
     if (!timer) {
         timer = setInterval(updateTimer, 1000);
-        fetch('./dist/ouvrir.php');
+        //fetch('./dist/ouvrir.php');
         loadingMessage.style.display = 'flex';
     }
 }
@@ -44,7 +55,7 @@ function stopTimer() {
     if (timer) {
         clearInterval(timer);
         timer = null;
-        fetch('./dist/fermer.php');
+        //fetch('./dist/fermer.php');
         loadingMessage.style.display = 'none';
     }
 }
