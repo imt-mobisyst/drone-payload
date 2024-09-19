@@ -49,4 +49,4 @@ fi
 echo "SSH on $ip_target"
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-scp -r $SCRIPT_DIR/../web/* bot@$ip_target:/srv/html
+scp -r $SCRIPT_DIR/../web/* bot@$ip_target:/home/bot/flask_app/
