@@ -188,7 +188,7 @@ body {
     margin-right: 10px;
 }
 
-.button-list {
+#button-list {
     display: flex;
     justify-content: center;
     gap: 30px;

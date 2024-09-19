@@ -5,7 +5,7 @@ let loadingMessage = document.getElementById('loading-message');
 
 function confirmStartTimer() {
     confirmActionType = "start";
-    openModal("static/images/not_started.svg", "Do you want to start the pump ?"); let minutes = 0;
+    openModal("static/images/not_started.svg", "Do you want to start the pump ?");
 }
 
 function confirmStopTimer() {
@@ -24,12 +24,19 @@ function confirmAction() {
     fetch("", {
         method: "POST",
         body: JSON.stringify({
-          action: action
+          action: action,
+          valve_nb: "v1"
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
         }
-    }).then(() => {window.location.reload()});
+    }).then( async (resp) => {
+      let data = await resp.json()
+      let valves_buttons = document.getElementById('button-list')
+
+      console.log(data)
+      data.foreach((valve) => console.log(valve))
+    });
     closeModal();
 }
 
