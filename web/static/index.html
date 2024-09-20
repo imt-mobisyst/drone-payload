@@ -16,28 +16,35 @@
             <img src="static/images/parasite.png" class="logo" alt="Parasite Logo" class="logo">
         </div>
 
-        <div class="timer-container">
-            <div class="time-label">
-                <p>Timer (s):</p>
-                <span id="timer">00</span>
-            </div>
-            <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
-                <img src="static/images/refresh.svg" style="width:60px;:red;" />
-            </a>
-        </div>
-
         <div id="loading-message" style="display: none;">
             <div class="spinner"></div>
             <p>Pumping...</p>
         </div>
 
-        <div id="button-list">
-            <a class="bouton ouvrir" href="#" onclick="confirmStartTimer(); return false;">
+        <div id="button-line">
+            <a class="valve">
+                <p>Valve 1</p>
+            </a>
+            <label class="switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+            </label>
+            <div class="timer-container">
+                <div class="timer-label">
+                    <p style="white-space: nowrap;">Timer (s):</p>
+                    <span id="timer">00</span>
+                </div>
+                <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
+                    <img src="static/images/refresh.svg" style="width:30px;:red;" />
+                </a>
+            </div>
+
+            <!--<a class="bouton ouvrir" href="#" onclick="confirmStartTimer(); return false;">
                 <img src="static/images/open_in_browser.svg" style="width:100px;" />
             </a>
             <a class="bouton fermer" href="#" onclick="confirmStopTimer(); return false;">
                 <img src="static/images/block.svg" style="width:100px;color:white;" />
-            </a>
+            </a>-->
         </div>
     </div>
 

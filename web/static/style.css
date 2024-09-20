@@ -1,9 +1,11 @@
 :root {
     --background-color: #282145;
+    --grey-color: #f0f0f0;
     --red-color: #ff4040;
     --green-color: #6bd653;
     --blue-color: #4a90e2;
     --orange-color: #ffa500;
+    --grey-shadow: #d0d0d0;
     --red-shadow: #af2929;
     --green-shadow: #479238;
     --blue-shadow: #2a5298;
@@ -31,19 +33,20 @@ body {
 }
 
 .timer-container {
-    width: 90%;
+    width: 40%;
     max-width: 500px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
+    /*margin-bottom: 40px;*/
+    font-size: 1.5rem;
     color: var(--timer-color);
     padding: 15px 25px;
     font-weight: bold;
+    gap: 15px;
 }
 
-.time-label {
+.timer-label {
     display: flex;
     align-items: center;
 }
@@ -56,6 +59,23 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     margin-left: 15px;
     letter-spacing: 2px;
+}
+
+.valve {
+    color: black;
+    padding: 15px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--grey-color);
+    box-shadow: 0 var(--hauteur-bouton) var(--grey-shadow);
+    max-width: 70px;
+    width: 23%;
 }
 
 .bouton {
@@ -74,7 +94,7 @@ body {
 .bouton.reset {
     background-color: var(--orange-color);
     box-shadow: 0 var(--hauteur-bouton) var(--orange-shadow);
-    max-width: 60px;
+    max-width: 30px;
     width: 18%;
 }
 
@@ -188,12 +208,79 @@ body {
     margin-right: 10px;
 }
 
-#button-list {
+#button-line {
     display: flex;
     justify-content: center;
     gap: 30px;
     width: 90%;
 }
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  top: 35%;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 
 @keyframes spin {
     0% {
@@ -219,7 +306,7 @@ body {
     }
 
     .timer-container {
-        font-size: 2rem;
+        font-size: 1.2rem;
         width: auto;
         gap: 15px;
     }
@@ -236,6 +323,6 @@ body {
 
 @media only screen and (max-width: 400px) {
     .timer-container {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 }
