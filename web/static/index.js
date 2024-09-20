@@ -1,41 +1,42 @@
 let timer;
 let seconds = 0;
-let confirmActionType = "";
 let loadingMessage = document.getElementById('loading-message');
 
-function confirmStartTimer() {
-    confirmActionType = "start";
-    openModal("static/images/not_started.svg", "Do you want to start the pump ?");
-}
-
-function confirmStopTimer() {
-    confirmActionType = "stop";
-    openModal("static/images/stop_circle.svg", "Do you want to stop the pump?");
-}
-
-function confirmAction() {
-    if (confirmActionType === "start") {
+function confirmAction(id) {
+    let value = document.getElementById(id)
+    console.log(value)
+    if (value.checked) {
         startTimer();
-        action = 0
-    } else if (confirmActionType === "stop") {
+        open = true
+    } else {
         stopTimer();
-        action = 1
+        open = false
     }
     fetch("", {
         method: "POST",
         body: JSON.stringify({
-          action: action,
-          valve_nb: "v1"
+          open: open,
+          valve_nb: id
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
         }
     }).then( async (resp) => {
-      let data = await resp.json()
-      let valves_buttons = document.getElementById('button-list')
+        if(resp.ok){
+            let data = await resp.json()
+            let valve = document.getElementById('valve-' + String(id))
+            if(data[id].is_open){
+                valve.style.backgroundColor = "#6bd653"
+                valve.style.boxShadow = "8px 8px #479238"
+                valve.children[1].children[1].textContent = "Opened"
+            } else {
+                valve.style.backgroundColor = "#f0f0f0"
+                valve.style.boxShadow = "8px 8px #d0d0d0"
+                valve.children[1].children[1].textContent = "Closed"
+            }
 
-      console.log(data)
-      data.foreach((valve) => console.log(valve))
+            console.log(data)
+        }
     });
     closeModal();
 }
@@ -54,7 +55,7 @@ function startTimer() {
     if (!timer) {
         timer = setInterval(updateTimer, 1000);
         //fetch('./dist/ouvrir.php');
-        loadingMessage.style.display = 'flex';
+        //loadingMessage.style.display = 'flex';
     }
 }
 
@@ -63,7 +64,7 @@ function stopTimer() {
         clearInterval(timer);
         timer = null;
         //fetch('./dist/fermer.php');
-        loadingMessage.style.display = 'none';
+        //loadingMessage.style.display = 'none';
     }
 }
 

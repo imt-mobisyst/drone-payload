@@ -1,6 +1,6 @@
 import json
 from RPi import GPIO
-from flask import Flask, request, flash, Response, send_from_directory
+from flask import Flask, render_template, request, flash, Response, send_from_directory
 
 PINS = {"v1": 11,"v2": 12}
 valves = {
@@ -17,19 +17,19 @@ for pin in PINS.values():
 
 @app.route('/', methods = ["GET", "POST"])
 def index():
-    if request.method == "POST": # 0 for open, any for close
+    if request.method == "POST": 
         # Note : Relay is active low
         if request.json is not None and \
         request.json["valve_nb"] is not None and \
-        request.json["action"] is not None:
+        request.json["open"] is not None:
             pin = PINS[request.json["valve_nb"]]
 
-            if(request.json["action"] == 0):
+            if(request.json["open"] == True):
                 GPIO.output(pin, GPIO.LOW)
             else:
                 GPIO.output(pin,GPIO.HIGH)
 
-            valves[request.json["valve_nb"]]["is_open"] = GPIO.input(pin)
+            valves[request.json["valve_nb"]]["is_open"] = not GPIO.input(pin)
 
             return json.dumps(valves)
         else:
@@ -37,5 +37,5 @@ def index():
             return Response(status = 500)
     
     else:
-        return send_from_directory('static', 'index.html') 
+        return render_template('index.html.jinja', valves=valves) 
 
