@@ -14,18 +14,15 @@
     <div class="wrapper">
 
         <div class="logo-container">
-            <img src="{{ url_for('static', filename='images/parasite.png') }}" class="logo" alt="Parasite Logo" class="logo">
+            <img src="{{ url_for('static', filename='images/parasite.png') }}" class="logo" alt="Parasite Logo"
+                class="logo">
         </div>
-
-        <!--<div id="loading-message" style="display: none;">
-            <div class="spinner"></div>
-            <p>Pumping...</p>
-        </div>-->
 
         <div id="buttons">
             <div class="button-line">
                 {% if valves["v1"]["is_open"] %}
-                <a id="valve-v1" class="valve" style="box-shadow: 8px 8px var(--green-shadow); background-color: var(--green-color);">
+                <a id="valve-v1" class="valve"
+                    style="box-shadow: 8px 8px var(--green-shadow); background-color: var(--green-color);">
                     <div style="margin-top: 100%"></div>
                     <div style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
                         <p style="white-space: nowrap; margin: 0px">VALVE 1</p>
@@ -33,7 +30,7 @@
                     </div>
                 </a>
                 <label class="switch">
-                    <input type="checkbox" id="v1"  onchange="confirmAction(this.id)" checked/>
+                    <input type="checkbox" id="v1" onchange="confirmAction(this.id)" checked />
                     <span class="slider round"></span>
                 </label>
                 {% else %}
@@ -45,45 +42,40 @@
                     </div>
                 </a>
                 <label class="switch">
-                    <input type="checkbox" id="v1"  onchange="confirmAction(this.id)"/>
+                    <input type="checkbox" id="v1" onchange="confirmAction(this.id)" />
                     <span class="slider round"></span>
                 </label>
                 {% endif %}
                 <div class="timer-container">
                     <div class="timer-label">
                         <p style="white-space: nowrap;">Timer (s):</p>
-                        <span id="timer">00</span>
+                        <span class="timer" id="timer1">00</span>
                     </div>
-                    <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
+                    <a class="bouton reset" href="#" onclick="resetTimer(0); return false;">
                         <img src="{{ url_for('static', filename='images/refresh.svg') }}" style="width:30px;:red;" />
                     </a>
                 </div>
 
-                <!--<a class="bouton ouvrir" href="#" onclick="confirmStartTimer(); return false;">
-                    <img src="static/images/open_in_browser.svg" style="width:100px;" />
-                </a>
-                <a class="bouton fermer" href="#" onclick="confirmStopTimer(); return false;">
-                    <img src="static/images/block.svg" style="width:100px;color:white;" />
-                </a>-->
             </div>
             <div class="button-line">
                 <a id="valve-v2" class="valve">
                     <div style="margin-top: 100%"></div>
                     <div style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
                         <p style="white-space: nowrap; margin: 0px">VALVE 2</p>
-                        <p style="white-space: nowrap; margin: 0px">{{ "Open" if valves["v2"]["is_open"] else "Closed" }}</p>
+                        <p style="white-space: nowrap; margin: 0px">{{ "Open" if valves["v2"]["is_open"] else "Closed"
+                            }}</p>
                     </div>
                 </a>
                 <label class="switch">
-                    <input type="checkbox" id="v2"  onchange="confirmAction(this.id)"/>
+                    <input type="checkbox" id="v2" onchange="confirmAction(this.id)" />
                     <span class="slider round"></span>
                 </label>
                 <div class="timer-container">
                     <div class="timer-label">
                         <p style="white-space: nowrap;">Timer (s):</p>
-                        <span id="timer">00</span>
+                        <span class="timer" id="timer2">00</span>
                     </div>
-                    <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
+                    <a class="bouton reset" href="#" onclick="resetTimer(1); return false;">
                         <img src="{{ url_for('static', filename='images/refresh.svg') }}" style="width:30px;:red;" />
                     </a>
                 </div>
@@ -93,7 +85,8 @@
 
     <div id="confirmation-modal" class="modal">
         <div class="modal-content">
-            <img id="modal-title" src="{{ url_for('static', filename='images/not_started.svg') }}" style="width:60px;color:white;" />
+            <img id="modal-title" src="{{ url_for('static', filename='images/not_started.svg') }}"
+                style="width:60px;color:white;" />
             <p id="modal-message" class="modal-message"></p>
             <div class="modal-buttons">
                 <a href="#" class="bouton ouvrir" onclick="confirmAction(); return false;">Yes</a>
