@@ -17,6 +17,7 @@ function confirmAction(id) {
             let data = await resp.json()
             let valve = document.getElementById('valve-' + String(id))
             let numTimer = id == "v1" ? 0 : 1
+
             if (data[id].is_open) {
                 startTimer(numTimer);
                 valve.style.backgroundColor = "#6bd653"
@@ -46,15 +47,15 @@ function closeModal() {
 }
 
 function startTimer(numTimer) {
-    if (!timer[numTimer]) {
-        timer[numTimer] = setInterval(() => updateTimer(numTimer), 1000);
+    if (!timers[numTimer]) {
+        timers[numTimer] = setInterval(() => updateTimer(numTimer), 1000);
     }
 }
 
 function stopTimer(numTimer) {
-    if (timer[numTimer]) {
-        clearInterval(timer[numTimer]);
-        timer[numTimer] = null;
+    if (timers[numTimer]) {
+        clearInterval(timers[numTimer]);
+        timers[numTimer] = null;
     }
 }
 
@@ -64,12 +65,13 @@ function resetTimer(numTimer) {
 }
 
 function updateTimer(numTimer) {
-    seconds++;
+    seconds[numTimer]++;
     updateTimerDisplay(numTimer);
 }
 
 function updateTimerDisplay(numTimer) {
     let updateTimer = document.getElementById(numTimer == 0 ? 'timer1' : 'timer2')
+    console.log(seconds);
     updateTimer.textContent = seconds[numTimer] > 9 ? seconds[numTimer] : "0" + seconds[numTimer];
 }
 

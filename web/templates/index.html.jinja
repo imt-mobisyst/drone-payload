@@ -42,7 +42,7 @@
                     </div>
                 </a>
                 <label class="switch">
-                    <input type="checkbox" id="v2" onchange="confirmAction(this.id)" />
+                    <input type="checkbox" id="v1" onchange="confirmAction(this.id)" />
                     <span class="slider round"></span>
                 </label>
                 {% endif %}
@@ -51,7 +51,7 @@
                         <p style="white-space: nowrap;">Timer (s):</p>
                         <span class="timer" id="timer1">00</span>
                     </div>
-                    <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
+                    <a class="bouton reset" href="#" onclick="resetTimer(0); return false;">
                         <img src="{{ url_for('static', filename='images/refresh.svg') }}" style="width:30px;:red;" />
                     </a>
                 </div>
@@ -75,7 +75,7 @@
                         <p style="white-space: nowrap;">Timer (s):</p>
                         <span class="timer" id="timer2">00</span>
                     </div>
-                    <a class="bouton reset" href="#" onclick="resetTimer(); return false;">
+                    <a class="bouton reset" href="#" onclick="resetTimer(1); return false;">
                         <img src="{{ url_for('static', filename='images/refresh.svg') }}" style="width:30px;:red;" />
                     </a>
                 </div>
