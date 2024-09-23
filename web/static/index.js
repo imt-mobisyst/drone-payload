@@ -29,7 +29,7 @@ function openOrClose(open) {
         if (resp.ok) {
             let data = await resp.json()
             let valve = document.getElementById('valve-' + String(currentValve))
-            let numTimer = id == "v1" ? 0 : 1
+            let numTimer = currentValve == "v1" ? 0 : 1
 
             if (data[currentValve].is_open) {
                 startTimer(numTimer);
