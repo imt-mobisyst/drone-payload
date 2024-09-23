@@ -87,9 +87,9 @@
         <div class="modal-content">
             <img id="modal-title" src="{{ url_for('static', filename='images/not_started.svg') }}"
                 style="width:60px;color:white;" />
-            <p id="modal-message" class="modal-message"></p>
+            <p id="modal-message" class="modal-message">Are you sure you want to open the valve ?</p>
             <div class="modal-buttons">
-                <a href="#" class="bouton ouvrir" onclick="confirmAction(); return false;">Yes</a>
+                <a href="#" class="bouton ouvrir" onclick="openOrClose(open = true)"; return false;">Yes</a>
                 <a href="#" class="bouton fermer" onclick="closeModal(); return false;">No</a>
             </div>
         </div>

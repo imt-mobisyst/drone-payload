@@ -1,24 +1,37 @@
 let timers = [null, null];
 let seconds = [0, 0];
+let currentValve;
 
 function confirmAction(id) {
-    let value = document.getElementById(id)
+    let value = document.getElementById(id).checked
+    currentValve = id
+
+    if (value) {
+        openModal()
+    } else {
+        openOrClose(open = false)
+    }
+}
+
+function openOrClose(open) {
     fetch("", {
         method: "POST",
+
         body: JSON.stringify({
-            open: value.checked,
-            valve_nb: id
+          open: open,
+          valve_nb: currentValve
         }),
+
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
     }).then(async (resp) => {
         if (resp.ok) {
             let data = await resp.json()
-            let valve = document.getElementById('valve-' + String(id))
-            let numTimer = id == "v1" ? 0 : 1
+            let valve = document.getElementById('valve-' + String(currentValve))
+            let numTimer = currentValve == "v1" ? 0 : 1
 
-            if (data[id].is_open) {
+            if(data[currentValve].is_open){
                 startTimer(numTimer);
                 valve.style.backgroundColor = "#6bd653"
                 valve.style.boxShadow = "8px 8px #479238"
@@ -29,21 +42,21 @@ function confirmAction(id) {
                 valve.style.boxShadow = "8px 8px #d0d0d0"
                 valve.children[1].children[1].textContent = "Closed"
             }
-            console.log(data)
-            console.log(`Timer ${numTimer} : ${value}`)
         }
     });
-    closeModal();
+
+    document.getElementById('confirmation-modal').style.display = 'none';
 }
 
-function openModal(title, message) {
-    document.getElementById('modal-title').src = title;
-    document.getElementById('modal-message').textContent = message;
+function openModal() {
     document.getElementById('confirmation-modal').style.display = 'flex';
 }
 
 function closeModal() {
     document.getElementById('confirmation-modal').style.display = 'none';
+    let button = document.getElementById(currentValve)
+
+    button.checked = false
 }
 
 function startTimer(numTimer) {

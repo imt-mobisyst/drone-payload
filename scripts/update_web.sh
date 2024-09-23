@@ -40,6 +40,13 @@ while getopts "hima:" option; do
    esac
 done
 
+if ! command -v sshpass 2>&1 >/dev/null
+then
+    echo "Please install sshpass by doing :"
+    echo "'sudo apt install sshpass'"
+    exit 1
+fi
+
 if [ -z "$ip_target" ]; then
   echo "Error: No IP address provided or selected."
   Help
@@ -49,5 +56,7 @@ fi
 echo "SSH on $ip_target"
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-scp -r $SCRIPT_DIR/../web/* bot@$ip_target:/home/bot/flask_app/
-ssh bot@$ip_target "sudo systemctl restart parasiteApp.service"
+sshpass -p "bot" scp -r $SCRIPT_DIR/../web/* bot@$ip_target:/home/bot/flask_app
+sshpass -p "bot" ssh bot@$ip_target "sudo systemctl restart parasiteApp.service"
+
+echo "Files copied and web server restarted successfully."

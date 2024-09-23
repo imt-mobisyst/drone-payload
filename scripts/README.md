@@ -2,6 +2,10 @@
 
 Ce dossier `scripts` contient des scripts bash pour automatiser certaines tâches nécessaires au développement ou au déploiement.
 
+## Prérequis
+
+Il est nécessaire d'avoir installé `sshpass` pour exécuter certains scripts : `sudo apt install sshpass`.
+
 ## Utilisation
 
 Les scripts sont exécutables via un terminal depuis n'importe quel dossier.
