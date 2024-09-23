@@ -34,12 +34,10 @@ function openOrClose(open) {
             if(data[currentValve].is_open){
                 startTimer(numTimer);
                 valve.style.backgroundColor = "#6bd653"
-                valve.style.boxShadow = "8px 8px #479238"
                 valve.children[1].children[1].textContent = "Opened"
             } else {
                 stopTimer(numTimer);
                 valve.style.backgroundColor = "#f0f0f0"
-                valve.style.boxShadow = "8px 8px #d0d0d0"
                 valve.children[1].children[1].textContent = "Closed"
             }
         }
@@ -84,7 +82,6 @@ function updateTimer(numTimer) {
 
 function updateTimerDisplay(numTimer) {
     let updateTimer = document.getElementById(numTimer == 0 ? 'timer1' : 'timer2')
-    console.log(seconds);
     updateTimer.textContent = seconds[numTimer] > 9 ? seconds[numTimer] : "0" + seconds[numTimer];
 }
 

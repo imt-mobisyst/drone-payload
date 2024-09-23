@@ -13,16 +13,20 @@
 
     <div class="wrapper">
 
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='images/parasite.png') }}" class="logo" alt="Parasite Logo"
+        <div class="header">
+            <img id="logo_imt" src="{{ url_for('static', filename='images/logo_imt.png') }}" alt="IMT Logo"
+                class="logo">
+            <h1 id="titre">Station de contrôle</h1>
+            <img id="logo_parasite" src="{{ url_for('static', filename='images/parasite.png') }}" alt="Parasite Logo"
                 class="logo">
         </div>
 
         <div id="buttons">
+
+            {# --------- VALVE 1 --------- #}
             <div class="button-line">
                 {% if valves["v1"]["is_open"] %}
-                <a id="valve-v1" class="valve"
-                    style="box-shadow: 8px 8px var(--green-shadow); background-color: var(--green-color);">
+                <a id="valve-v1" class="valve" style="background-color: var(--green-color);">
                     <div style="margin-top: 100%"></div>
                     <div style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
                         <p style="white-space: nowrap; margin: 0px">VALVE 1</p>
@@ -48,7 +52,7 @@
                 {% endif %}
                 <div class="timer-container">
                     <div class="timer-label">
-                        <p style="white-space: nowrap;">Timer (s):</p>
+                        <p style="white-space: nowrap;">Chrono :</p>
                         <span class="timer" id="timer1">00</span>
                     </div>
                     <a class="bouton reset" href="#" onclick="resetTimer(0); return false;">
@@ -57,7 +61,25 @@
                 </div>
 
             </div>
+            {# -------- FIN VALVE 1 --------- #}
+
+
+            {# ------------ VALVE 2 ----------- #}
             <div class="button-line">
+                {% if valves["v2"]["is_open"] %}
+                <a id="valve-v2" class="valve" style="background-color: var(--green-color);">
+                    <div style="margin-top: 100%"></div>
+                    <div style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
+                        <p style="white-space: nowrap; margin: 0px">VALVE 2</p>
+                        <p style="white-space: nowrap; margin: 0px">{{ "Open" if valves["v2"]["is_open"] else "Closed"
+                            }}</p>
+                    </div>
+                </a>
+                <label class="switch">
+                    <input type="checkbox" id="v2" onchange="confirmAction(this.id)" checked />
+                    <span class="slider round"></span>
+                </label>
+                {% else %}
                 <a id="valve-v2" class="valve">
                     <div style="margin-top: 100%"></div>
                     <div style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
@@ -70,9 +92,10 @@
                     <input type="checkbox" id="v2" onchange="confirmAction(this.id)" />
                     <span class="slider round"></span>
                 </label>
+                {% endif %}
                 <div class="timer-container">
                     <div class="timer-label">
-                        <p style="white-space: nowrap;">Timer (s):</p>
+                        <p style="white-space: nowrap;">Chrono :</p>
                         <span class="timer" id="timer2">00</span>
                     </div>
                     <a class="bouton reset" href="#" onclick="resetTimer(1); return false;">
@@ -80,6 +103,7 @@
                     </a>
                 </div>
             </div>
+            {# --------- FIN VALVE 2 --------- #}
         </div>
     </div>
 
