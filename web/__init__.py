@@ -13,7 +13,7 @@ app = Flask(__name__)
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 for pin in PINS.values():
-    GPIO.setup(pin, GPIO.OUT)
+    GPIO.setup(pin, GPIO.OUT, initial=GPIO.HIGH)
 
 @app.route('/', methods = ["GET", "POST"])
 def index():
