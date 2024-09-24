@@ -56,7 +56,12 @@ fi
 echo "SSH on $ip_target"
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo "Deleting current web files..."
+sshpass -p "bot" sshpass -p "bot" ssh bot@$ip_target "sudo rm -r /home/bot/flask_app/*"
+echo "Copying new files..."
 sshpass -p "bot" scp -r $SCRIPT_DIR/../web/* bot@$ip_target:/home/bot/flask_app
+echo "Restarting service..."
 sshpass -p "bot" ssh bot@$ip_target "sudo systemctl restart parasiteApp.service"
 
-echo "Files copied and web server restarted successfully."
+echo "Web page updated and restarted successfully."

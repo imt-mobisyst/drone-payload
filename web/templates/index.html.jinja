@@ -24,33 +24,37 @@
         <div id="buttons">
 
             {# --------- VALVE 1 --------- #}
-            <div class="button-line">
-                {% if valves["v1"]["is_open"] %}
-                <a id="valve-v1" class="valve" style="background-color: var(--green-color);">
-                    <div style="margin-top: 100%"></div>
-                    <div style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
-                        <p style="white-space: nowrap; margin: 0px">VALVE 1</p>
-                        <p style="white-space: nowrap; margin: 0px">Opened</p>
-                    </div>
-                </a>
-                <label class="switch">
-                    <input type="checkbox" id="v1" onchange="confirmAction(this.id)" checked />
-                    <span class="slider round"></span>
-                </label>
-                {% else %}
-                <a id="valve-v1" class="valve">
-                    <div style="margin-top: 100%"></div>
-                    <div style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
-                        <p style="white-space: nowrap; margin: 0px">VALVE 1</p>
-                        <p style="white-space: nowrap; margin: 0px">Closed</p>
-                    </div>
-                </a>
-                <label class="switch">
-                    <input type="checkbox" id="v1" onchange="confirmAction(this.id)" />
-                    <span class="slider round"></span>
-                </label>
-                {% endif %}
-                <div class="timer-container">
+            <div class="button-section">
+                <div class="button-line">
+                    {% if valves["v1"]["is_open"] %}
+                    <a id="valve-v1" class="valve" style="background-color: var(--green-color);">
+                        <div style="margin-top: 100%"></div>
+                        <div
+                            style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
+                            <p style="white-space: nowrap; margin: 0px">VALVE 1</p>
+                            <p style="white-space: nowrap; margin: 0px">Opened</p>
+                        </div>
+                    </a>
+                    <label class="switch">
+                        <input type="checkbox" id="v1" onchange="confirmAction(this.id)" checked />
+                        <span class="slider round"></span>
+                    </label>
+                    {% else %}
+                    <a id="valve-v1" class="valve">
+                        <div style="margin-top: 100%"></div>
+                        <div
+                            style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
+                            <p style="white-space: nowrap; margin: 0px">VALVE 1</p>
+                            <p style="white-space: nowrap; margin: 0px">Closed</p>
+                        </div>
+                    </a>
+                    <label class="switch">
+                        <input type="checkbox" id="v1" onchange="confirmAction(this.id)" />
+                        <span class="slider round"></span>
+                    </label>
+                    {% endif %}
+                </div>
+                <div class="button-line">
                     <div class="timer-label">
                         <p style="white-space: nowrap;">Chrono :</p>
                         <span class="timer" id="timer1">00</span>
@@ -65,35 +69,41 @@
 
 
             {# ------------ VALVE 2 ----------- #}
-            <div class="button-line">
-                {% if valves["v2"]["is_open"] %}
-                <a id="valve-v2" class="valve" style="background-color: var(--green-color);">
-                    <div style="margin-top: 100%"></div>
-                    <div style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
-                        <p style="white-space: nowrap; margin: 0px">VALVE 2</p>
-                        <p style="white-space: nowrap; margin: 0px">{{ "Open" if valves["v2"]["is_open"] else "Closed"
-                            }}</p>
-                    </div>
-                </a>
-                <label class="switch">
-                    <input type="checkbox" id="v2" onchange="confirmAction(this.id)" checked />
-                    <span class="slider round"></span>
-                </label>
-                {% else %}
-                <a id="valve-v2" class="valve">
-                    <div style="margin-top: 100%"></div>
-                    <div style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
-                        <p style="white-space: nowrap; margin: 0px">VALVE 2</p>
-                        <p style="white-space: nowrap; margin: 0px">{{ "Open" if valves["v2"]["is_open"] else "Closed"
-                            }}</p>
-                    </div>
-                </a>
-                <label class="switch">
-                    <input type="checkbox" id="v2" onchange="confirmAction(this.id)" />
-                    <span class="slider round"></span>
-                </label>
-                {% endif %}
-                <div class="timer-container">
+            <div class="button-section">
+                <div class="button-line">
+                    {% if valves["v2"]["is_open"] %}
+                    <a id="valve-v2" class="valve" style="background-color: var(--green-color);">
+                        <div style="margin-top: 100%"></div>
+                        <div
+                            style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
+                            <p style="white-space: nowrap; margin: 0px">VALVE 2</p>
+                            <p style="white-space: nowrap; margin: 0px">{{ "Open" if valves["v2"]["is_open"] else
+                                "Closed"
+                                }}</p>
+                        </div>
+                    </a>
+                    <label class="switch">
+                        <input type="checkbox" id="v2" onchange="confirmAction(this.id)" checked />
+                        <span class="slider round"></span>
+                    </label>
+                    {% else %}
+                    <a id="valve-v2" class="valve">
+                        <div style="margin-top: 100%"></div>
+                        <div
+                            style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
+                            <p style="white-space: nowrap; margin: 0px">VALVE 2</p>
+                            <p style="white-space: nowrap; margin: 0px">{{ "Open" if valves["v2"]["is_open"] else
+                                "Closed"
+                                }}</p>
+                        </div>
+                    </a>
+                    <label class="switch">
+                        <input type="checkbox" id="v2" onchange="confirmAction(this.id)" />
+                        <span class="slider round"></span>
+                    </label>
+                    {% endif %}
+                </div>
+                <div class="button-line">
                     <div class="timer-label">
                         <p style="white-space: nowrap;">Chrono :</p>
                         <span class="timer" id="timer2">00</span>

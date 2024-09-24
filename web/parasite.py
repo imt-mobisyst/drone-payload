@@ -1,6 +1,8 @@
+#!/bin/python3
+
 import json
 from RPi import GPIO
-from flask import Flask, render_template, request, flash, Response, send_from_directory
+from flask import Flask, render_template, request, flash, Response
 
 PINS = {"v1": 11,"v2": 12}
 valves = {
@@ -38,4 +40,3 @@ def index():
     
     else:
         return render_template('index.html.jinja', valves=valves) 
-
