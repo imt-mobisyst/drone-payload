@@ -23,5 +23,6 @@ Pour lancer le serveur manuellement, en étant par avance connecté à la Raspbe
 flask --app ~/flask-app run --host 0.0.0.0
 ```
 
-Vous pouvez aussi lancer directement le service correspondant : `sudo systemctl start parasiteApp.service`
+Cette commande n'est pas recommandée pour un serveur en production. Toutefois elle est utile pour faire de simples tests, sans passer par `gunicorn`.
 
+Vous pouvez aussi lancer directement le server `gunicorn` correspondant : `sudo systemctl start parasiteApp.service`
