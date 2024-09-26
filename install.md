@@ -22,8 +22,7 @@ The **MATRICE 600 PRO** drone serves as the aerial platform for this project.
 
 ### Payload (Drone-Mounted)
 
-- 1 Raspberry Pi 3 with MicroSD card
-- 2 XBee Module (PRO S2C) with antenna
+- 1 XBee Module (PRO S2C) with antenna
 - 1 Arduino board
 - Solenoid valve(s) (1-2 depending on requirements)
 - Electrical relay(s) (1-2 matching solenoid valve count)
@@ -88,7 +87,7 @@ To set up the Arduino side of the project, follow these steps:
 To set up the Raspberry Pi:
 
 1. **Install Raspberry Pi OS:**
-   - Flash the latest version of Raspberry Pi OS onto an SD card.
+   - Flash the latest version of Raspberry Pi OS **LITE** onto an SD card.
    - You can follow the official Raspberry Pi [installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/) if needed.
 
 2. **Install Required Packages:**
