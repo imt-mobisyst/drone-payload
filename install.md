@@ -30,15 +30,25 @@ The **MATRICE 600 PRO** drone serves as the aerial platform for this project.
 
 ### Ground Station
 
-- Raspberry Pi (for communication relay)
+- Raspberry Pi 3(for communication relay)
 - XBee Module (PRO S2C) with antenna
 
 ### Configuration Setup
 
 - Linux laptop
 - Ethernet cable
+- Battery Pack
 
 ## Communication Architecture
+
+```mermaid
+
+flowchart TD
+    A[Drone M600] -->|Arduino + Xbee| B(Raspberry PI on ground)
+    B -->C{Operator with a Smartphone}
+ 
+
+```
 
 
 
@@ -63,7 +73,50 @@ The **MATRICE 600 PRO** drone serves as the aerial platform for this project.
 
 ## Installation
 
-### 1. Arduino Setup
+### 1. Xbee Configuration 
+
+
+
+### 1. **Configure XBee Radio:**
+
+To properly configure and set up communication between the two XBee modules (one for the Arduino and one for the Raspberry Pi), follow these steps:
+
+1. **Connect the XBee Modules:**
+   - Plug both XBee modules into your laptop’s USB ports using XBee USB adapters or a USB-to-serial converter.
+
+2. **Open XCTU Software:**
+   - Download and install the [XCTU Software](https://www.digi.com/products/xbee-rf-solutions/xctu-software/xctu) if you haven't already.
+   - Open the software and ensure both XBee modules are detected under the "Discover Devices" tab.
+
+3. **Load Configuration Profiles:**
+   - You have two configuration profiles provided in the project repository:
+     - `profile_arduino.xpro` for the XBee connected to the Arduino.
+     - `profile_rpi_coordinator.xpro` for the XBee connected to the Raspberry Pi.
+   - To apply these profiles:
+     1. Select the XBee module from the device list in XCTU.
+     2. Go to the "Profiles" tab and click "Load."
+     3. Navigate to the `xbee/arduino` directory, select the appropriate `.xpro` file, and apply the configuration.
+     4. Repeat the process for both XBee modules (one for `profile_arduino.xpro` and the other for `profile_rpi_coordinator.xpro`).
+
+4. **Verify XBee Communication:**
+   - After applying the configurations, ensure that both XBee modules are set up to communicate with each other. The `profile_rpi_coordinator.xpro` file configures the Raspberry Pi XBee as the communication coordinator, while `profile_arduino.xpro` sets up the Arduino XBee as a remote device.
+   - Check the communication settings such as PAN ID, baud rate, and operating channel to ensure they match for both modules.
+
+5. **Connect XBee to Raspberry Pi and Arduino:**
+   - **For Arduino:**  
+     - Connect the **TX (Transmitter)** pin of the Arduino to the **DIN** pin of the XBee.
+     - Connect the **RX (Receiver)** pin of the Arduino to the **DOUT** pin of the XBee.
+     - Power the XBee with 3.3V (not 5V) and connect the GND of the Arduino to the GND of the XBee.
+   - **For Raspberry Pi:**  
+     - Use a USB-to-serial converter to connect the XBee to the Raspberry Pi via USB.
+     - Alternatively, connect the **TX/RX** pins of the Raspberry Pi directly to the **DIN/DOUT** pins of the XBee (use a level shifter if required to match voltage levels).
+
+6. **Testing Communication:**
+   - After the physical connection and configuration, you can test the communication by sending a basic message from one XBee to the other using XCTU’s console interface. Ensure that the message sent by the Arduino’s XBee is received by the Raspberry Pi’s XBee, confirming successful communication.
+
+
+
+### 2. Arduino Setup
 
 To set up the Arduino side of the project, follow these steps:
 
@@ -82,7 +135,7 @@ To set up the Arduino side of the project, follow these steps:
    - Select the correct board and port from the "Tools" menu.
    - Upload the sketch to the Arduino.
 
-### 2. Raspberry Pi Setup
+### 3. Raspberry Pi Setup
 
 To set up the Raspberry Pi:
 
@@ -95,13 +148,14 @@ To set up the Raspberry Pi:
      ```bash
      sudo apt-get update
      sudo apt-get install python3 python3-pip git
+     sudo apt install rpi-imager
      ```
 
 3. **Clone the Project Repository:**
    - Navigate to the directory where you want to store the project:
      ```bash
-     git clone <your-project-repo-link>
-     cd <your-project-directory>
+     git clone https://github.com/imt-mobisyst/drone-payload
+     cd drone-payload
      ```
 
 4. **Install Python Libraries:**
@@ -110,9 +164,24 @@ To set up the Raspberry Pi:
      pip3 install -r requirements.txt
      ```
 
-5. **Configure XBee Radio:**
-   - Ensure the Raspberry Pi is connected to the XBee module via serial interface.
-   - Configure the XBee on the Raspberry Pi using [XBee Configuration Software](https://www.digi.com/products/xbee-rf-solutions/xctu-software/xctu) or Zigbee TH Pro software.
+5. **Install RaspAP:**
+   - Perform the following steps over SSH (if applicable):
+     ```bash
+     curl -sL https://install.raspap.com | bash
+     ```
+   - Leave the default options, but set **VPN** to "None".
+   - Access the RaspAP web interface using `http://<raspberry-pi-ip>:8080` with username `admin` and password `secret`.
+
+6. **Configure Lighttpd:**
+   - Change the port from 80 to 8080 by editing the Lighttpd config file:
+     ```bash
+     sudo nano /etc/lighttpd/lighttpd.conf
+     ```
+   - Replace port 80 with 8080 and restart the service:
+     ```bash
+     sudo systemctl restart lighttpd.service
+     ```
+
 
 ### 3. Wiring
 
