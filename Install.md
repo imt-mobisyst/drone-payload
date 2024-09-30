@@ -137,51 +137,7 @@ To set up the Arduino side of the project, follow these steps:
 
 ### 3. Raspberry Pi Setup
 
-To set up the Raspberry Pi:
-
-1. **Install Raspberry Pi OS:**
-   - Flash the latest version of Raspberry Pi OS **LITE** onto an SD card.
-   - You can follow the official Raspberry Pi [installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/) if needed.
-
-2. **Install Required Packages:**
-   - Open a terminal and run the following commands to update and install necessary software:
-     ```bash
-     sudo apt-get update
-     sudo apt-get install python3 python3-pip git
-     sudo apt install rpi-imager
-     ```
-
-3. **Clone the Project Repository:**
-   - Navigate to the directory where you want to store the project:
-     ```bash
-     git clone https://github.com/imt-mobisyst/drone-payload
-     cd drone-payload
-     ```
-
-4. **Install Python Libraries:**
-   - Run the following command to install the required Python libraries:
-     ```bash
-     pip3 install -r requirements.txt
-     ```
-
-5. **Install RaspAP:**
-   - Perform the following steps over SSH (if applicable):
-     ```bash
-     curl -sL https://install.raspap.com | bash
-     ```
-   - Leave the default options, but set **VPN** to "None".
-   - Access the RaspAP web interface using `http://<raspberry-pi-ip>:8080` with username `admin` and password `secret`.
-
-6. **Configure Lighttpd:**
-   - Change the port from 80 to 8080 by editing the Lighttpd config file:
-     ```bash
-     sudo nano /etc/lighttpd/lighttpd.conf
-     ```
-   - Replace port 80 with 8080 and restart the service:
-     ```bash
-     sudo systemctl restart lighttpd.service
-     ```
-
+To set up the Raspberry Pi, please follow the steps in [this file](./doc/Installation_PI.md).
 
 ### 3. Wiring
 
