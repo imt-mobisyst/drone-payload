@@ -8,10 +8,12 @@ Doc encore à l'état de brouillon.
 sudo apt update
 sudo apt install rpi-imager
 ```
-Lancer Imager via les applis.
+Lancer Imager.
 
 Raspberry Pi OS Lite (64 bits) in "Other" :
+
 ![Image Pi OS](./images/imager/screen_PiOS.png "OS à installer")
+
 Et choisir la carte SD formatée au préalable dans "Storage".
 Dans la options, configurer comme ci-dessous :
 ![Image Parametres](./images/imager/screen_Params_OS.png "Paramètres pour l'OS à installer")
@@ -93,7 +95,7 @@ After=network.target
 User=bot
 Group=bot
 WorkingDirectory=/home/bot/flask_app
-ExecStart=gunicorn --chdir /home/bot/flask_app --workers 3 --bind 0.0.0.0:80 wsgi:app
+ExecStart=sudo gunicorn --chdir /home/bot/flask_app --workers 1 --bind 0.0.0.0:80 wsgi:app
 
 [Install]
 WantedBy=multi-user.target
