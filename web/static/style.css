@@ -1,0 +1,338 @@
+:root {
+    --background-color: #282145;
+    --grey-color: #f0f0f0;
+    --red-color: #ff4040;
+    --green-color: #6bd653;
+    --blue-color: #4a90e2;
+    --orange-color: #ffa500;
+    --red-shadow: #af2929;
+    --green-shadow: #479238;
+    --blue-shadow: #2a5298;
+    --orange-shadow: #cc8400;
+    --timer-color: #f0f0f0;
+    --timer-background: #3a3a3a;
+    --logo-color: #1B1C22;
+    --hauteur-bouton: 12px;
+    --largeur-slider: 34px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-label {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.timer {
+    color: var(--timer-color);
+    background-color: var(--timer-background);
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    margin-left: 15px;
+    letter-spacing: 2px;
+}
+
+.valve {
+    color: black;
+    padding: 15px 15px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--grey-color);
+    transform: rotate(45deg);
+    max-width: 70px;
+    max-height: 70px;
+    width: 11vw;
+    height: 11vw;
+    position: relative;
+}
+
+.bouton {
+    color: white;
+    padding: 15px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bouton.reset {
+    background-color: var(--orange-color);
+    box-shadow: 0 var(--hauteur-bouton) var(--orange-shadow);
+    max-width: 30px;
+    width: 18%;
+}
+
+.bouton.ouvrir {
+    background-color: var(--green-color);
+    box-shadow: 0 var(--hauteur-bouton) var(--green-shadow);
+    max-width: 150px;
+    width: 30%;
+}
+
+.bouton.fermer {
+    background-color: var(--red-color);
+    box-shadow: 0 var(--hauteur-bouton) var(--red-shadow);
+    max-width: 150px;
+    width: 30%;
+}
+
+.bouton:hover {
+    transform: translateY(-3px);
+}
+
+.bouton:active {
+    transform: translateY(var(--hauteur-bouton));
+    box-shadow: none;
+}
+
+.bouton.reset:hover,
+.bouton.reset:active {
+    background-color: var(--orange-shadow);
+}
+
+.bouton.ouvrir:hover,
+.bouton.ouvrir:active {
+    background-color: var(--green-shadow);
+}
+
+.bouton.fermer:hover,
+.bouton.fermer:active {
+    background-color: var(--red-shadow);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    background-color: var(--logo-color);
+    height: auto;
+    width: 100%;
+}
+
+#titre {
+    position: absolute;
+    left: 50%;
+    color: white;
+    text-align: center;
+    transform: translateX(-50%) translateY(80%);
+}
+
+.logo {
+    height: 12vh;
+    width: auto;
+    margin: 0 30px 0 30px;
+}
+
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: var(--background-color);
+    border: 2px solid #ffffff;
+    padding: 30px 0 30px 0;
+    width: 90%;
+    max-width: 350px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.modal-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.modal-message {
+    color: rgb(255, 255, 255);
+    font-size: 1.4em;
+    margin-bottom: 20px;
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+.button-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 90%;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+.button-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 30px;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 76px;
+    height: 42px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: var(--largeur-slider);
+    width: var(--largeur-slider);
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(var(--largeur-slider));
+    -ms-transform: translateX(var(--largeur-slider));
+    transform: translateX(var(--largeur-slider));
+}
+
+.slider.round {
+    border-radius: 42px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    #titre {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+
+    body {
+        font-size: 0.8rem;
+    }
+
+    .button-section {
+        flex-direction: column;
+    }
+
+    .valve {
+        padding: 8px 8px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        min-width: 60px;
+        min-height: 60px;
+    }
+
+    .button-section {
+        gap: 10px;
+    }
+
+    .logo {
+        height: 8vh;
+    }
+
+    .bouton.reset {
+        padding: 10px;
+        border-radius: 20px;
+        box-shadow: 0 calc(var(--hauteur-bouton)/2) var(--orange-shadow);
+    }
+
+    #buttons {
+        justify-content: space-around;
+        width: 100%;
+    }
+}

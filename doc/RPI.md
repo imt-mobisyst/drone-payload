@@ -48,7 +48,7 @@ sudo usermod -aG gpio www-data
 ## Copying to the Raspberry Pi
 
 ```bash
-scp <path_to_git_project>/web/* bot@<rpi_ip>:/srv/html/
+scp -r <path_to_git_project>/web/* bot@<rpi_ip>:/srv/html/
 ```
 
 > **Note :**
