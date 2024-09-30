@@ -69,15 +69,15 @@ flowchart TD
 
 # Installation 
 
+## 1. Raspberry Pi Setup
+
+To set up the Raspberry Pi, please follow the steps in [this file](./doc/Installation_PI.md).
+
+## 2. Xbee Configuration 
 
 
-## Installation
 
-### 1. Xbee Configuration 
-
-
-
-### 1. **Configure XBee Radio:**
+### Configure XBee Radio:
 
 To properly configure and set up communication between the two XBee modules (one for the Arduino and one for the Raspberry Pi), follow these steps:
 
@@ -116,7 +116,7 @@ To properly configure and set up communication between the two XBee modules (one
 
 
 
-### 2. Arduino Setup
+## 3. Arduino Setup
 
 To set up the Arduino side of the project, follow these steps:
 
@@ -135,24 +135,21 @@ To set up the Arduino side of the project, follow these steps:
    - Select the correct board and port from the "Tools" menu.
    - Upload the sketch to the Arduino.
 
-### 3. Raspberry Pi Setup
 
-To set up the Raspberry Pi, please follow the steps in [this file](./doc/Installation_PI.md).
-
-### 3. Wiring
+## 4. Wiring
 
 Here’s how to wire the components together:
 
-#### **Arduino to XBee:**
+### Arduino to XBee:
 - Connect the **TX (Transmitter)** pin of the Arduino to the **DIN** pin of the XBee.
 - Connect the **RX (Receiver)** pin of the Arduino to the **DOUT** pin of the XBee.
 - Power the XBee with 3.3V (not 5V) and connect the GND of the Arduino to the GND of the XBee.
 
-#### **Raspberry Pi to XBee:**
+### Raspberry Pi to XBee:
 - Use a USB-to-serial converter to connect the XBee to the Raspberry Pi via USB.
 - Alternatively, connect the **TX/RX** pins of the Raspberry Pi directly to the **DIN/DOUT** pins of the XBee (ensure you use a level shifter to match voltage levels if required).
 
-#### **Other Connections:**
+### Other Connections:
 - Add any additional connections (e.g., sensors, LEDs) according to your project needs.
   
 You can use a diagram like this to visualize the wiring:

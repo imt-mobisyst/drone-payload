@@ -48,6 +48,7 @@ curl -sL https://install.raspap.com | bash
 
 Dans les questions qui suivent :
 - Laisser le chemin `/var/www/html` par défaut.
+- Accepter `Complete installation with these values?`.
 - Dire non à toutes les questions suivantes.
 - Accepter de faire un reboot.
 
@@ -68,13 +69,16 @@ sudo nano /etc/lighttpd/lighttpd.conf
 ```
 Puis changer le port `80` en port `8080`, et restart le service `sudo systemctl restart lighttpd.service`
 
-Dorénavant, l'url pour se rendre sur la page de raspap est : <adresseIP>:8080
+Dorénavant, l'url pour se rendre sur la page de raspap est : `http://<adresseIP>:8080`.
 
+## Installation de l'environnement de production
+
+Créer le dossier qui contiendra les fichiers de l'appli web :
 `mkdir /home/bot/flask_app`
 
 ## Serveur en production
 
-Lien du tuto avec tout dedans : https://sysadmin.cyklodev.com/deployer-une-application-flask/
+Vous pouvez vérifier les commandes suivantes dans ce tuto si vous le désirez : https://sysadmin.cyklodev.com/deployer-une-application-flask/.
 
 ### Config du service :
 
@@ -83,9 +87,12 @@ Installation d'une dépendance pour faire tourner le serveur :
 sudo apt install gunicorn
 ```
 
-`sudo nano /etc/systemd/system/parasiteApp.service`
+Mise en place du service dans *systemd* :
+```
+sudo nano /etc/systemd/system/parasiteApp.service
+```
 
-Contenu du fichier à coller :
+Coller le contenu suivant dans ce fichier :
 ```
 [Unit]
 Description=Gunicorn Flask Parasite App 
@@ -100,29 +107,24 @@ ExecStart=sudo gunicorn --chdir /home/bot/flask_app --workers 1 --bind 0.0.0.0:8
 [Install]
 WantedBy=multi-user.target
 ```
-Save the file.
+Save the file and close it.
 
 Installation de flask :
 ```
 sudo apt install python3-flask
 ```
 
-And :
-
-
+Lancer le service gunicorn :
 ```
 sudo systemctl enable parasiteApp.service
 sudo systemctl start parasiteApp.service
 ```
 
-Pour être sûr de ne pas avoir de problème de certificat sur certains navgateurs :
-```
-sudo rm /etc/dnsmasq.d/090_adblock.conf
-```
-
 Et en notant les adresses IP, bien veiller à ce que l'url soit en "http" et non en "https".
 
-Attention, les commandes suivantes sont à effectuer son le pc du développeur en local :
+## Dépendances côté développeur :
+
+**Attention**, les commandes suivantes sont à effectuer son le pc du développeur en local :
 
 Après avoir fait un git clone du repository à l'endroit de votre choix sur votre pc :
 
@@ -136,5 +138,3 @@ Installation de sshpass pour l'exécution des scripts :
 sudo apt install sshpass
 ```
 
-TODO : avec le gunicorn manuel sur le port 5000, ça marche
-faire en sorte que ça marche sur le port 80
