@@ -1,10 +1,12 @@
 #!/bin/python3
 
 import json
-from RPi import GPIO
 from flask import Flask, render_template, request, flash, Response
 
-PINS = {"v1": 11,"v2": 12}
+from digi.xbee.exception import TransmitException, InvalidOperatingModeException, TimeoutException
+from digi.xbee.devices import ZigBeeDevice, RemoteZigBeeDevice
+from digi.xbee.models.address import XBee64BitAddress
+
 valves = {
     "v1": {"is_open": False},
     "v2": {"is_open": False}
@@ -12,10 +14,12 @@ valves = {
 
 app = Flask(__name__)
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-for pin in PINS.values():
-    GPIO.setup(pin, GPIO.OUT, initial=GPIO.HIGH)
+device = ZigBeeDevice("/dev/ttyUSB0", 9600)
+addr = XBee64BitAddress(bytearray([0x00, 0x13, 0xA2, 0x00, 0x41, 0xBF, 0x6A, 0x04]))
+remote = RemoteZigBeeDevice(device, x64bit_addr=addr)
+
+device.open()
+device.flush_queues()
 
 @app.route('/', methods = ["GET", "POST"])
 def index():
@@ -24,19 +28,58 @@ def index():
         if request.json is not None and \
         request.json["valve_nb"] is not None and \
         request.json["open"] is not None:
-            pin = PINS[request.json["valve_nb"]]
+            pin = request.json["valve_nb"][1] # "1" or "2"
 
             if(request.json["open"] == True):
-                GPIO.output(pin, GPIO.LOW)
+                data = "O" + str(pin)
             else:
-                GPIO.output(pin,GPIO.HIGH)
+                data = "C" + str(pin)
 
-            valves[request.json["valve_nb"]]["is_open"] = not GPIO.input(pin)
+            send_zb_data(data)
+
+            xbee_message = get_zb_data(5) # Wait for response for 5 seconds
+            if xbee_message is not None:
+                xbee_message = xbee_message.data.decode()
+
+                valves[request.json["valve_nb"]]["is_open"] = \
+                    True if xbee_message[1] == "O" else False
+
+            else:
+                flash("Error, no response from Drone...")
 
             return json.dumps(valves)
+
         else:
             flash("Error, try again...")
             return Response(status = 500)
     
     else:
         return render_template('index.html.jinja', valves=valves) 
+
+
+def send_zb_data(data):
+    try:
+        device.send_data(remote, data=data)
+    except InvalidOperatingModeException:
+        flash("ERROR : Bad XBee configuration...")
+    except TimeoutException:
+        flash("ERROR : Can't connect to Drone...")
+    except TransmitException:
+        flash("ERROR : Bad response from Drone...")
+    except:
+        flash("ERROR : Can't use XBee module...")
+
+
+def get_zb_data(timeout):
+    try:
+        return device.read_data(timeout)
+    except InvalidOperatingModeException:
+        flash("ERROR : Bad XBee configuration...")
+    except TimeoutException:
+        pass
+    except TransmitException:
+        flash("ERROR : Bad response from Drone...")
+    except:
+        flash("ERROR : Can't use XBee module...")
+
+    return None

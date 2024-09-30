@@ -51,6 +51,31 @@ Dans les questions qui suivent :
 - Dire non à toutes les questions suivantes.
 - Accepter de faire un reboot.
 
+(Sur la Raspberry Pi) Éditer le fichier `/lib/systemd/system/hostapd.service` :
+
+```
+[Unit]
+Description=Access point and authentication server for Wi-Fi and Ethernet
+Documentation=man:hostapd(8)
+After=network.target
+ConditionFileNotEmpty=/etc/hostapd/hostapd.conf
+
+[Service]
+Type=forking
+PIDFile=/run/hostapd.pid
+Restart=on-failure
+RestartSec=2
+Environment=DAEMON_CONF=/etc/hostapd/hostapd.conf
+EnvironmentFile=-/etc/default/hostapd
+ExecStart=/usr/sbin/hostapd -B -P /run/hostapd.pid $DAEMON_OPTS ${DAEMON_CONF}
+ExecStartPre=/bin/sleep 1                                                        # Ajouter cette ligne 
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Puis redémarrer la Pi.
+
 Vous pouvez vous rendre sur la page de RaspAP en tapant l'adresse IP de la PI sur le réseau IOT IMT NORD EUROPE en tant qu'url :
 - **username** : `admin`
 - **password** : `secret`
@@ -102,9 +127,37 @@ WantedBy=multi-user.target
 ```
 Save the file.
 
+### Config du DNS
+
+Éditer le fichier `/etc/dnsmask.d/090_raspap.conf` et ajouter les lignes suivantes à la fin du fichier :
+
+```
+port=53
+listen-address=127.0.0.1,10.3.141.1
+interface=wlan0
+
+domain=station.local
+address=/station.local/10.3.141.1
+```
+
+### Config du serveur
+
 Installation de flask :
 ```
 sudo apt install python3-flask
+```
+
+Installation de pip :
+```
+sudo apt install python3-pip
+```
+
+Installation de digi-xbee :
+```
+sudo apt install python3-serial && \
+    pip download digi-xbee && \
+    unzip digi_xbee-1.5.0-py3-none-any.whl && \
+    sudo mv digi /usr/local/lib/python3.11/dist-packages/
 ```
 
 And :
