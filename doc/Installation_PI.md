@@ -114,6 +114,19 @@ Installation de flask :
 sudo apt install python3-flask
 ```
 
+Installation de pip :
+```
+sudo apt install python3-pip
+```
+
+Installation de digi-xbee :
+```
+sudo apt install python3-serial && \
+    pip download digi-xbee && \
+    unzip digi_xbee-1.5.0-py3-none-any.whl && \
+    sudo mv digi /usr/local/lib/python3.11/dist-packages/
+```
+
 Lancer le service gunicorn :
 ```
 sudo systemctl enable parasiteApp.service
