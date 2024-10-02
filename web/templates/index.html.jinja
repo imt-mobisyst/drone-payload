@@ -23,33 +23,35 @@
 
         <div id="buttons">
 
-            {# --------- VALVE 1 --------- #}
+            {# DEBUT VALVE #}
+            {% for valve in valves %}
             <div class="button-section">
                 <div class="button-line">
-                    {% if valves["v1"]["is_open"] %}
-                    <a id="valve-v1" class="valve" style="background-color: var(--green-color);">
+                    {% if valve["is_open"] %}
+                    <a id="{{'valve-v' ~ (loop.index-1)}}" class="valve" style="background-color: var(--green-color);">
                         <div style="margin-top: 100%"></div>
                         <div
                             style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
-                            <p style="white-space: nowrap; margin: 0px">VALVE 1</p>
+                            <p style="white-space: nowrap; margin: 0px">VALVE {{loop.index}}</p>
                             <p style="white-space: nowrap; margin: 0px">Opened</p>
                         </div>
                     </a>
                     <label class="switch">
-                        <input type="checkbox" id="v1" onchange="confirmAction(this.id)" checked />
+                        <input type="checkbox" id="{{'v' ~ (loop.index-1)}}" onchange="confirmAction(this.id)"
+                            checked />
                         <span class="slider round"></span>
                     </label>
                     {% else %}
-                    <a id="valve-v1" class="valve">
+                    <a id="{{'valve-v' ~ (loop.index-1)}}" class="valve">
                         <div style="margin-top: 100%"></div>
                         <div
                             style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
-                            <p style="white-space: nowrap; margin: 0px">VALVE 1</p>
+                            <p style="white-space: nowrap; margin: 0px">VALVE {{loop.index}}</p>
                             <p style="white-space: nowrap; margin: 0px">Closed</p>
                         </div>
                     </a>
                     <label class="switch">
-                        <input type="checkbox" id="v1" onchange="confirmAction(this.id)" />
+                        <input type="checkbox" id="{{'v' ~ (loop.index-1)}}" onchange="confirmAction(this.id)" />
                         <span class="slider round"></span>
                     </label>
                     {% endif %}
@@ -57,63 +59,15 @@
                 <div class="button-line">
                     <div class="timer-label">
                         <p style="white-space: nowrap;">Chrono :</p>
-                        <span class="timer" id="timer1">00</span>
+                        <span class="timer" id="{{'timer' ~ (loop.index-1)}}">00</span>
                     </div>
                     <a class="bouton reset" href="#" onclick="resetTimer(0); return false;">
                         <img src="{{ url_for('static', filename='images/refresh.svg') }}" style="width:30px;:red;" />
                     </a>
                 </div>
-
             </div>
-            {# -------- FIN VALVE 1 --------- #}
-
-
-            {# ------------ VALVE 2 ----------- #}
-            <div class="button-section">
-                <div class="button-line">
-                    {% if valves["v2"]["is_open"] %}
-                    <a id="valve-v2" class="valve" style="background-color: var(--green-color);">
-                        <div style="margin-top: 100%"></div>
-                        <div
-                            style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
-                            <p style="white-space: nowrap; margin: 0px">VALVE 2</p>
-                            <p style="white-space: nowrap; margin: 0px">{{ "Open" if valves["v2"]["is_open"] else
-                                "Closed"
-                                }}</p>
-                        </div>
-                    </a>
-                    <label class="switch">
-                        <input type="checkbox" id="v2" onchange="confirmAction(this.id)" checked />
-                        <span class="slider round"></span>
-                    </label>
-                    {% else %}
-                    <a id="valve-v2" class="valve">
-                        <div style="margin-top: 100%"></div>
-                        <div
-                            style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
-                            <p style="white-space: nowrap; margin: 0px">VALVE 2</p>
-                            <p style="white-space: nowrap; margin: 0px">{{ "Open" if valves["v2"]["is_open"] else
-                                "Closed"
-                                }}</p>
-                        </div>
-                    </a>
-                    <label class="switch">
-                        <input type="checkbox" id="v2" onchange="confirmAction(this.id)" />
-                        <span class="slider round"></span>
-                    </label>
-                    {% endif %}
-                </div>
-                <div class="button-line">
-                    <div class="timer-label">
-                        <p style="white-space: nowrap;">Chrono :</p>
-                        <span class="timer" id="timer2">00</span>
-                    </div>
-                    <a class="bouton reset" href="#" onclick="resetTimer(1); return false;">
-                        <img src="{{ url_for('static', filename='images/refresh.svg') }}" style="width:30px;:red;" />
-                    </a>
-                </div>
-            </div>
-            {# --------- FIN VALVE 2 --------- #}
+            {# FIN VALVE #}
+            {% endfor %}
         </div>
     </div>
 
@@ -123,12 +77,14 @@
                 style="width:60px;color:white;" />
             <p id="modal-message" class="modal-message">Are you sure you want to open the valve ?</p>
             <div class="modal-buttons">
-                <a href="#" class="bouton ouvrir" onclick="openOrClose(open = true)"; return false;">Yes</a>
+                <a href="#" class="bouton ouvrir" onclick="openOrClose(open = true)" ; return false;">Yes</a>
                 <a href="#" class="bouton fermer" onclick="closeModal(); return false;">No</a>
             </div>
         </div>
     </div>
-
+    <script>
+        var globalNbValves = {{ nb_valves | tojson }};
+    </script>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 

@@ -139,8 +139,27 @@ Et en notant les adresses IP, bien veiller à ce que l'url soit en "http" et non
 
 **Attention**, les commandes suivantes sont à effectuer son le pc du développeur en local :
 
-Après avoir fait un git clone du repository à l'endroit de votre choix sur votre pc :
+Faites un git clone du repository à l'endroit de votre choix sur votre pc.
 
+### Configuration des scripts
+
+Dans le [fichier de configuration](../web/static/config.json), préciser le nombre de vannes utilisé (par défaut sur 2).
+
+Puis, trouver l'adresse MAC de la PI grâce à `arp-scan` :
+```
+sudo apt install arp-scan
+```
+
+En étant connecté à IoT IMT Nord Europe, tapez :
+```
+sudo arp-scan -lg
+```
+
+L'adresse MAC de la PI se trouve très probablement à la ligne comportant le nom `Raspberry Pi Trading Ltd`.
+Écrivez cette adresse dans la variable `IP_IOT=` en haut du fichier [find_pi.sh](../scripts/update_web.sh).
+Puis faites de même en étant connecté au réseau de la PI, dans la variable `IP_RPI=`.
+
+Puis uploader le code source sur la PI en exécutant le script correspondant dans votre repository :
 ```
 cd drone-payload
 sudo chmod +x -R ./scripts
@@ -151,3 +170,8 @@ Installation de sshpass pour l'exécution des scripts :
 sudo apt install sshpass
 ```
 
+Enfin, en étant connecté à IoT IMT Nord Europe, lancer le script :
+```
+./scripts/update_web.sh
+```
+Si vous êtes connecté à un autre réseau, ou que vous voulez préciser l'adresse manuellement, veuillez consulter l'aide [ici](../scripts/README.md) ou faire `./scripts/update_web.sh -h`.

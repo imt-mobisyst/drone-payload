@@ -60,6 +60,7 @@ void zbResponseCallback(ZBRxResponse &rx, uintptr_t other_data_p) {
     Serial.println("C2");
   }
 
+  delay(500);
   xbee.send(tx);
 }
 

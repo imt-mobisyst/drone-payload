@@ -1,4 +1,7 @@
 #!/bin/bash
+IP_IOT="10.89.2.55" # Adresse IP de la PI sur le réseau IoT IMT Nord Europe
+IP_RPI="10.3.141.1" # Adresse IP de la PI sur son propre réseau
+
 
 # Display Help
 Help()
@@ -13,10 +16,6 @@ Help()
    echo "h     Print the help documentation."
    echo
 }
-
-# IP addresses
-IP_RPI="10.3.141.1"
-IP_IOT="10.89.2.1"
 
 ip_target=$IP_IOT
 

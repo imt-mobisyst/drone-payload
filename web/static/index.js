@@ -1,12 +1,19 @@
-let timers = [null, null];
-let seconds = [0, 0];
+let timers;
+let seconds;
 let currentValve;
+let nbValves = 0;
+
+document.addEventListener('DOMContentLoaded', function () {
+    nbValves = globalNbValves;
+    seconds = new Array(nbValves).fill(0)
+    timers = new Array(nbValves).fill(null)
+});
 
 function confirmAction(id) {
-    let value = document.getElementById(id).checked
+    let open = document.getElementById(id).checked // checked = open
     currentValve = id
 
-    if (value) {
+    if (open) {
         openModal()
     } else {
         openOrClose(open = false)
@@ -14,29 +21,34 @@ function confirmAction(id) {
 }
 
 function openOrClose(open) {
+    reqCurrentValve = htmlId2jsonId(currentValve)
+
     fetch("", {
         method: "POST",
 
         body: JSON.stringify({
-          open: open,
-          valve_nb: currentValve
+            open: open,
+            valve_nb: reqCurrentValve
         }),
 
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
     }).then(async (resp) => {
+        console.log("Réponse reçue :");
+        console.log(resp);
+
         if (resp.ok) {
             let data = await resp.json()
             let valve = document.getElementById('valve-' + String(currentValve))
-            let numTimer = currentValve == "v1" ? 0 : 1
+            let numValve = currentValve.slice(-1)
 
-            if(data[currentValve].is_open){
-                startTimer(numTimer);
+            if (data[numValve]["is_open"]) {
+                startTimer(numValve);
                 valve.style.backgroundColor = "#6bd653"
                 valve.children[1].children[1].textContent = "Opened"
             } else {
-                stopTimer(numTimer);
+                stopTimer(numValve);
                 valve.style.backgroundColor = "#f0f0f0"
                 valve.children[1].children[1].textContent = "Closed"
             }
@@ -81,7 +93,15 @@ function updateTimer(numTimer) {
 }
 
 function updateTimerDisplay(numTimer) {
-    let updateTimer = document.getElementById(numTimer == 0 ? 'timer1' : 'timer2')
+    let idTimer = "timer" + String(numTimer)
+    let updateTimer = document.getElementById(idTimer)
     updateTimer.textContent = seconds[numTimer] > 9 ? seconds[numTimer] : "0" + seconds[numTimer];
 }
 
+function htmlId2jsonId(htmlId) {
+    // les identifiants de valve commencent à 0 dans le template html
+    // les identifiants de valve commencent à 1 dans les requêtes json
+    currentNum = Number(htmlId.slice(-1))
+    beforeNum = htmlId.slice(0, -1)
+    return beforeNum + String(currentNum + 1)
+}
