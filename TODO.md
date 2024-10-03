@@ -1,6 +1,6 @@
 # Project TODO List
 
-This document outlines the remaining tasks that need to be completed before the project can be considered finished. Tasks are categorized by priority, feature, or milestone for clarity.
+This document outlines the remaining tasks that need to be completed before the project can be considered finished. 
 
 
 
