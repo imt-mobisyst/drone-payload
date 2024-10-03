@@ -41,15 +41,8 @@ The **MATRICE 600 PRO** drone serves as the aerial platform for this project.
 
 ## Communication Architecture
 
-```mermaid
 
-flowchart TD
-    A[Drone M600] -->|Arduino + Xbee| B(Raspberry PI on ground)
-    B -->C{Operator with a Smartphone}
- 
-
-```
-
+![Alt text](doc/images/schema.png "Optional title")
 
 
 ## Advantages
@@ -141,9 +134,12 @@ To set up the Arduino side of the project, follow these steps:
 Here’s how to wire the components together:
 
 ### Arduino to XBee:
-- Connect the **TX (Transmitter)** pin of the Arduino to the **DIN** pin of the XBee.
-- Connect the **RX (Receiver)** pin of the Arduino to the **DOUT** pin of the XBee.
-- Power the XBee with 3.3V (not 5V) and connect the GND of the Arduino to the GND of the XBee.
+
+
+You can use a diagram like this to visualize the wiring:
+
+
+![Alt text](doc/images/Arduino.drawio.svg)
 
 ### Raspberry Pi to XBee:
 - Use a USB-to-serial converter to connect the XBee to the Raspberry Pi via USB.
@@ -152,6 +148,3 @@ Here’s how to wire the components together:
 ### Other Connections:
 - Add any additional connections (e.g., sensors, LEDs) according to your project needs.
   
-You can use a diagram like this to visualize the wiring:
-
-
