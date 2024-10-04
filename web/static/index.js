@@ -85,27 +85,53 @@ function updateTimerDisplay(numTimer) {
     updateTimer.textContent = seconds[numTimer] > 9 ? seconds[numTimer] : "0" + seconds[numTimer];
 }
 
-function updateConnectionStatus() {
-    fetch("/check_wifi")
-        .then(response => response.json())
-        .then(data => {
-            const isPhoneConnectedToRaspberry = data.isConnected; // Backend response
+function toggleDeviceToRpi(isDeviceConnectedToRpi) {
+    const deviceToRpiImgOk = document.getElementById('device-to-rpi-ok');
+    const deviceToRpiImgNok = document.getElementById('device-to-rpi-nok');
 
-            const phoneToRaspberryImgOk = document.getElementById('device-to-rpi-ok');
-            const phoneToRaspberryImgNok = document.getElementById('device-to-rpi-nok');
-
-            if (isPhoneConnectedToRaspberry) {
-                phoneToRaspberryImgNok.hidden = true;
-                phoneToRaspberryImgOk.hidden = false;
-            } else {
-                phoneToRaspberryImgNok.hidden = false;
-                phoneToRaspberryImgOk.hidden = true;
-            }
-        })
-        .catch(error => console.error('Error checking Wi-Fi connection:', error));
+    if (isDeviceConnectedToRpi) {
+        deviceToRpiImgNok.hidden = true;
+        deviceToRpiImgOk.hidden = false;
+    } else {
+        deviceToRpiImgNok.hidden = false;
+        deviceToRpiImgOk.hidden = true;
+    }
 }
 
-setInterval(updateConnectionStatus, 5000); 
+function toggleRpiToDrone(isRpiConnectedToDrone) {
+    const rpiToDroneImgOk = document.getElementById('rpi-to-drone-ok');
+    const rpiToDroneImgNok = document.getElementById('rpi-to-drone-nok');
+
+    if (isRpiConnectedToDrone) {
+        rpiToDroneImgNok.hidden = true;
+        rpiToDroneImgOk.hidden = false;
+    } else {
+        rpiToDroneImgOk.hidden = true;
+        rpiToDroneImgNok.hidden = false;
+    }
+}
+
+async function updateConnectionStatus() {
+    const id = setTimeout(() => { toggleRpiToDrone(false); toggleDeviceToRpi(false); } , 6000)
+
+    await fetch("/check_wifi")
+        .then(response => response.json())
+        .then(data => {
+            // Backend response
+            const isDeviceConnectedToRpi = data.deviceToRpi;
+            const isRpiConnectedToDrone = data.rpiToDrone;
+
+            toggleDeviceToRpi(isDeviceConnectedToRpi)
+            toggleRpiToDrone(isRpiConnectedToDrone)
+
+        })
+        .catch(() => { toggleRpiToDrone(false); toggleDeviceToRpi(false); });
+
+    clearTimeout(id)
+}
+
+updateConnectionStatus()
+setInterval(updateConnectionStatus, 3000); 
 
 
 

@@ -16,15 +16,20 @@ Il suffit de faire `git checkout <tag>` pour charger le repository d'une ancienn
 - Version **WiFi** (tag: `rpi_wifi`): Serveur utilisant Flask et des fichiers Python et le WiFi pour communiquer avec l'Arduino. C'est une solution simple mais avec une courte portée (moins de 50m a priori).
 - Version **PHP** (tag: `php_version`): Page web entièrement en PHP au lieu de Python, fonctionnant avec un serveur *lighttpd*, et communicant en WiFi avec l'Arduino. C'est le prototype le plus ancien du projet. Il est nécessaire de modifier la configuation lighttpd acutelle pour la faire fonctionner.
 
-## Documentation
-- Doc
-  - [SDK](doc/SDK.md)
-    - [MSDK](doc/SDK/MSDK.md)
-    - [OSDK](doc/SDK/OSDK.md)
-  - [Modèles 3D](doc/3D.md)
-  - [Payload](doc/Payload.md)
-- [Web](web/README.md)
-- [Scripts](scripts/README.md)
+## Sommaire de la documentation
+
+Voici une hiérarchie de la documentation présente dans le repository. Les liens sont clicables, et amènent aux fichiers en **markdown** correspondants à la section.
+
+- [TODO list](./TODO.md) : liste du matériel manquant nécessaire au projet
+- [Web](./web/README.md) : code source pour la page web de la PI
+- [Scripts](./scripts/README.md) : script bash pour l'automatisation de la tâche déploiement du code sur la PI
+- [Design](./Design/README.md) : fichier figma pour le design du logo "PARASITE"
+- _Doc générales_
+  - [Modèles 3D](./doc/3D.md) : modèles 3D utilisés pour la partie mécanique
+  - [Payload](./doc/Payload.md) : Carctéristiques du drone et de sa charge utile
+  - [SDK](./doc/SDK.md) : Software development kit de DJI pour le drone
+    - [MSDK](./doc/SDK/MSDK.md) : Piste du SDK pour mobiles
+    - [OSDK](./doc/SDK/OSDK.md) : Piste du SDK embarqué sur le drone
 
 ## System Overview
 
