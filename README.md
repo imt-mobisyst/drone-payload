@@ -1,10 +1,10 @@
 # Drone-Payload
-UV projet de P1 en NU/IS, par des FISE 2025 en CI3.
+UV projet de P1 en NU / IS, par des FISE 2025 en CI3.
 
 **Membres du groupe** :
-- Timothé KOBAK
-- Matis SPINELLI
-- Arthur MATA
+- Timothé KOBAK (timothe.kobak@etu.imt-nord-europe.fr)
+- Matis SPINELLI (matis.spinelli@etu.imt-nord-europe.fr)
+- Arthur MATA (arthur.mata@etu.imt-nord-europe.fr)
 
 **Remarque** : La documentation a été rédigée en partant du principe que toutes les commandes sont effectuées sur un système Ubuntu.
 
@@ -15,17 +15,19 @@ Il suffit de faire `git checkout <tag>` pour charger le repository d'une ancienn
 
 - Version **WiFi** (tag: `rpi_wifi`): Serveur utilisant Flask et des fichiers Python et le WiFi pour communiquer avec l'Arduino. C'est une solution simple mais avec une courte portée (moins de 50m a priori).
 - Version **PHP** (tag: `php_version`): Page web entièrement en PHP au lieu de Python, fonctionnant avec un serveur *lighttpd*, et communicant en WiFi avec l'Arduino. C'est le prototype le plus ancien du projet. Il est nécessaire de modifier la configuation lighttpd acutelle pour la faire fonctionner.
+- Version **1.0** (tag: `parasite_1.0`): Première version fonctionnelle basée sur ZigBee avec une arduino et un module XBee sur le drone et une Raspberry Pi au sol. L'interface web est toujours présente mais tourne en Python via Flask.
 
 ## Sommaire de la documentation
 
 Voici une hiérarchie de la documentation présente dans le repository. Les liens sont clicables, et amènent aux fichiers en **markdown** correspondants à la section.
 
+- [Installation PI](./doc/Installation_PI.md) : guide d'installation et de déploiement sur la PI
 - [TODO list](./TODO.md) : liste du matériel manquant nécessaire au projet
 - [Web](./web/README.md) : code source pour la page web de la PI
 - [Scripts](./scripts/README.md) : script bash pour l'automatisation de la tâche déploiement du code sur la PI
 - [Design](./Design/README.md) : fichier figma pour le design du logo "PARASITE"
 - _Doc générales_
-  - [Modèles 3D](./doc/3D.md) : modèles 3D utilisés pour la partie mécanique
+  - [Arduino](./doc/Arduino.md) : installation des fichiers pour Arduino
   - [Payload](./doc/Payload.md) : Carctéristiques du drone et de sa charge utile
   - [SDK](./doc/SDK.md) : Software development kit de DJI pour le drone
     - [MSDK](./doc/SDK/MSDK.md) : Piste du SDK pour mobiles
@@ -93,10 +95,11 @@ The **MATRICE 600 PRO** drone serves as the aerial platform for this project.
 
 ## 1. Raspberry Pi Setup
 
-To set up the Raspberry Pi, please follow the steps in [this file](./doc/Installation_PI.md).
+To set up the Raspberry Pi, please follow the detailed installation guide in [this file](./doc/Installation_PI.md).
+
+Comme indiqué dans ce fichier, le nombre de vannes utilisé peut être modifié facilement. Il suffit de modifier la valeur `nb_vannes` dans le fichier de configuration [config.json](./web/static/config.json)
 
 ## 2. Xbee Configuration 
-
 
 
 ### Configure XBee Radio:

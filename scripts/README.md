@@ -2,6 +2,8 @@
 
 Ce dossier `scripts` contient des scripts bash pour automatiser certaines tâches nécessaires au développement ou au déploiement.
 
+[<-- Retour en arrière](../README.md)
+
 ## Prérequis
 
 Il est nécessaire d'avoir installé `sshpass` pour exécuter certains scripts : `sudo apt install sshpass`.

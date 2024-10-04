@@ -44,8 +44,6 @@ void zbResponseCallback(ZBRxResponse &rx, uintptr_t other_data_p) {
   xbee.getResponse().getZBRxResponse(rx);
   uint8_t *data_p = rx.getData();
 
-  // IMPORTANT : S'il y a plus de 2 vannes, faire un switch-case ici avec le nombre de vannes total
-
   if (*data_p == 'X') {  // XBee connection test
     tx.setPayload(confirm_payload, 1);
   } else {

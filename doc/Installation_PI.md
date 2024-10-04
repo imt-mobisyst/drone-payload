@@ -1,6 +1,6 @@
 # Installation de l'environnement complet sur la PI
 
-Doc encore à l'état de brouillon.
+[<-- Retour en arrière](../README.md)
 
 ## Installation de l'OS sur la Raspberry Pi
 
@@ -18,8 +18,11 @@ Et choisir la carte SD formatée au préalable dans "Storage".
 Dans la options, configurer comme ci-dessous :
 ![Image Parametres](./images/imager/screen_Params_OS.png "Paramètres pour l'OS à installer")
 
-Se connecter en ssh : `ssh bot@10.89.2.1` en étant connecté à IOT IMT NORD EUROPE. Il faut donc connecter la PI en Ethernet au réseau.
+Se connecter en ssh : `ssh bot@10.89.2.1` ou `ssh bot@10.89.2.55` en étant connecté à IOT IMT NORD EUROPE. Il faut donc connecter la PI en Ethernet au réseau.
 Le mot de passe est celui mis dans les paramètres de Raspberry Imager.
+
+> **Note :**
+> Pour se connecter à la Raspberry Pi sur un réseau différent, ou si son adresse IP a changé, vous pouvez utiliser `arp-scan -lg` pour essayer de la trouver.  
 
 ### RaspAP
 
@@ -51,6 +54,31 @@ Dans les questions qui suivent :
 - Accepter `Complete installation with these values?`.
 - Dire non à toutes les questions suivantes.
 - Accepter de faire un reboot.
+
+(Sur la Raspberry Pi) Éditer le fichier `/lib/systemd/system/hostapd.service` :
+
+```
+[Unit]
+Description=Access point and authentication server for Wi-Fi and Ethernet
+Documentation=man:hostapd(8)
+After=network.target
+ConditionFileNotEmpty=/etc/hostapd/hostapd.conf
+
+[Service]
+Type=forking
+PIDFile=/run/hostapd.pid
+Restart=on-failure
+RestartSec=2
+Environment=DAEMON_CONF=/etc/hostapd/hostapd.conf
+EnvironmentFile=-/etc/default/hostapd
+ExecStart=/usr/sbin/hostapd -B -P /run/hostapd.pid $DAEMON_OPTS ${DAEMON_CONF}
+ExecStartPre=/bin/sleep 1                                                        # Ajouter cette ligne 
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Puis redémarrer la Pi.
 
 Vous pouvez vous rendre sur la page de RaspAP en tapant l'adresse IP de la PI sur le réseau IOT IMT NORD EUROPE en tant qu'url :
 - **username** : `admin`
@@ -107,7 +135,21 @@ ExecStart=sudo gunicorn --chdir /home/bot/flask_app --workers 1 --bind 0.0.0.0:8
 [Install]
 WantedBy=multi-user.target
 ```
-Save the file and close it.
+
+### Config du DNS
+
+Éditer le fichier `/etc/dnsmask.d/090_raspap.conf` et ajouter les lignes suivantes à la fin du fichier :
+
+```
+port=53
+listen-address=127.0.0.1,10.3.141.1
+interface=wlan0
+
+domain=station.local
+address=/station.local/10.3.141.1
+```
+
+### Config du serveur
 
 Installation de flask :
 ```
@@ -143,7 +185,9 @@ Faites un git clone du repository à l'endroit de votre choix sur votre pc.
 
 ### Configuration des scripts
 
-Dans le [fichier de configuration](../web/static/config.json), préciser le nombre de vannes utilisé (par défaut sur 2).
+Dans le fichier de configuration [config.json](../web/static/config.json), préciser le nombre de vannes utilisées (par défaut sur 2).
+
+Si vous modifiez cette valeur du fichier de configuration, il faut mettre à jour le code sur la PI et redémarrer le service (voir la section suivante).
 
 Puis, trouver l'adresse MAC de la PI grâce à `arp-scan` :
 ```
