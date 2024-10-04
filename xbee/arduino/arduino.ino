@@ -40,10 +40,11 @@ SoftwareSerial xbeeSerial(RX_PIN, TX_PIN);
 XBeeWithCallbacks xbee = XBeeWithCallbacks();
 ZBTxRequest tx = ZBTxRequest(addr64, confirm_payload, sizeof(confirm_payload));
 
-
 void zbResponseCallback(ZBRxResponse &rx, uintptr_t other_data_p) {
   xbee.getResponse().getZBRxResponse(rx);
   uint8_t *data_p = rx.getData();
+
+  // IMPORTANT : S'il y a plus de 2 vannes, faire un switch-case ici avec le nombre de vannes total
 
   if (*data_p == 'X') {  // XBee connection test
     tx.setPayload(confirm_payload, 1);
@@ -64,7 +65,6 @@ void zbResponseCallback(ZBRxResponse &rx, uintptr_t other_data_p) {
     }
   }
 
-  delay(500);
   xbee.send(tx);
 }
 
@@ -72,7 +72,6 @@ void errorCallback(uint8_t err, uintptr_t func_data_p) {
   Serial.print("Error code : ");
   Serial.println(err, 10);
 }
-
 
 /*
  * Setup

@@ -282,6 +282,38 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
+.connection-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%;
+    padding: 0 10px;
+    max-width: 800px;
+}
+
+.device {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+}
+
+.connection {
+    width: 20%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.connection-image {
+    max-width: 80px;
+    height: auto;
+    width: 90%;
+}
 
 @keyframes spin {
     0% {

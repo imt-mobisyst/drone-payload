@@ -21,7 +21,7 @@ function confirmAction(id) {
 }
 
 function openOrClose(open) {
-    reqCurrentValve = htmlId2jsonId(currentValve)
+    let reqCurrentValve = currentValve
 
     fetch("", {
         method: "POST",
@@ -98,10 +98,50 @@ function updateTimerDisplay(numTimer) {
     updateTimer.textContent = seconds[numTimer] > 9 ? seconds[numTimer] : "0" + seconds[numTimer];
 }
 
-function htmlId2jsonId(htmlId) {
-    // les identifiants de valve commencent à 0 dans le template html
-    // les identifiants de valve commencent à 1 dans les requêtes json
-    currentNum = Number(htmlId.slice(-1))
-    beforeNum = htmlId.slice(0, -1)
-    return beforeNum + String(currentNum + 1)
+function toggleDeviceToRpi(isDeviceConnectedToRpi) {
+    const deviceToRpiImgOk = document.getElementById('device-to-rpi-ok');
+    const deviceToRpiImgNok = document.getElementById('device-to-rpi-nok');
+
+    if (isDeviceConnectedToRpi) {
+        deviceToRpiImgNok.hidden = true;
+        deviceToRpiImgOk.hidden = false;
+    } else {
+        deviceToRpiImgNok.hidden = false;
+        deviceToRpiImgOk.hidden = true;
+    }
 }
+
+function toggleRpiToDrone(isRpiConnectedToDrone) {
+    const rpiToDroneImgOk = document.getElementById('rpi-to-drone-ok');
+    const rpiToDroneImgNok = document.getElementById('rpi-to-drone-nok');
+
+    if (isRpiConnectedToDrone) {
+        rpiToDroneImgNok.hidden = true;
+        rpiToDroneImgOk.hidden = false;
+    } else {
+        rpiToDroneImgOk.hidden = true;
+        rpiToDroneImgNok.hidden = false;
+    }
+}
+
+async function updateConnectionStatus() {
+    const id = setTimeout(() => { toggleRpiToDrone(false); toggleDeviceToRpi(false); } , 6000)
+
+    await fetch("/check_wifi")
+        .then(response => response.json())
+        .then(data => {
+            // Backend response
+            const isDeviceConnectedToRpi = data.deviceToRpi;
+            const isRpiConnectedToDrone = data.rpiToDrone;
+
+            toggleDeviceToRpi(isDeviceConnectedToRpi)
+            toggleRpiToDrone(isRpiConnectedToDrone)
+
+        })
+        .catch(() => { toggleRpiToDrone(false); toggleDeviceToRpi(false); });
+
+    clearTimeout(id)
+}
+
+updateConnectionStatus()
+setInterval(updateConnectionStatus, 3000); 

@@ -1,7 +1,8 @@
 #!/bin/python3
 
 import json
-from flask import Flask, render_template, request, flash, Response
+from flask import Flask, render_template, request, Response
+
 from digi.xbee.exception import TransmitException, InvalidOperatingModeException, TimeoutException
 from digi.xbee.devices import ZigBeeDevice, RemoteZigBeeDevice
 from digi.xbee.models.address import XBee64BitAddress
@@ -44,12 +45,12 @@ def index():
                 valves[int(valve_nb)]["is_open"] = xbee_open
 
             else:
-                flash("Error, no response from Drone...")
+                print("Error, no response from Drone...")
 
             return json.dumps(valves)
 
         else:
-            flash("Error, try again...")
+            print("Error, try again...")
             return Response(status = 500)
     
     else:
@@ -60,25 +61,38 @@ def send_zb_data(data):
     try:
         device.send_data(remote, data=data)
     except InvalidOperatingModeException:
-        flash("ERROR : Bad XBee configuration...")
-    except TimeoutException:
-        flash("ERROR : Can't connect to Drone...")
-    except TransmitException:
-        flash("ERROR : Bad response from Drone...")
+        print("ERROR : Bad XBee configuration...")
+    except (TimeoutException, TransmitException):
+        print("ERROR : Can't connect to Drone...")
     except:
-        flash("ERROR : Can't use XBee module...")
+        print("ERROR : Can't use XBee module...")
 
 
 def get_zb_data(timeout):
     try:
         return device.read_data(timeout)
     except InvalidOperatingModeException:
-        flash("ERROR : Bad XBee configuration...")
+        print("ERROR : Bad XBee configuration...")
     except TimeoutException:
         pass
-    except TransmitException:
-        flash("ERROR : Bad response from Drone...")
     except:
-        flash("ERROR : Can't use XBee module...")
+        print("ERROR : Can't use XBee module...")
 
     return None
+
+@app.route('/check_wifi', methods=['GET'])
+def check_wifi():
+    client_ip = request.remote_addr
+    # Assuming the RPi's network is on 10.3.141. subnet 
+    device_to_rpi = client_ip.startswith("10.3.141.")
+    rpi_to_drone = False
+
+    if device_to_rpi:
+        send_zb_data("X") # Value for connection test
+
+        # Wait for response for 2 seconds, should be less than the connection test interval
+        xbee_message = get_zb_data(2) 
+        if xbee_message is not None and xbee_message.data.decode() == "C":
+            rpi_to_drone = True
+
+    return json.dumps({"deviceToRpi": device_to_rpi, "rpiToDrone": rpi_to_drone})

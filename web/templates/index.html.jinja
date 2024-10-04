@@ -11,8 +11,6 @@
 
 <body>
 
-    <div class="wrapper">
-
         <div class="header">
             <img id="logo_imt" src="{{ url_for('static', filename='images/logo_imt.png') }}" alt="IMT Logo"
                 class="logo">
@@ -20,6 +18,33 @@
             <img id="logo_parasite" src="{{ url_for('static', filename='images/parasite.png') }}" alt="Parasite Logo"
                 class="logo">
         </div>
+<div class="wrapper">
+    <div class="connection-section">
+        <div class="device">
+            <img src="{{ url_for('static', filename='images/device.svg') }}" alt="M" class="connection-image" />
+        </div>
+        <div class="connection" id="phone-to-raspberry">
+            <img src="{{ url_for('static', filename='images/dots.svg') }}" alt="M" class="connection-image" />
+            <img id="device-to-rpi-nok"src="{{ url_for('static', filename='images/nolink.svg') }}" alt="M" class="connection-image"/>
+            <img id="device-to-rpi-ok"src="{{ url_for('static', filename='images/link.svg') }}" alt="M" class="connection-image" hidden/>
+            <img src="{{ url_for('static', filename='images/dots.svg') }}" alt="M" class="connection-image" />
+        </div>
+        <div class="device">
+       
+            <img src="{{ url_for('static', filename='images/celltower.svg') }}" alt="M" class="connection-image" />
+        </div>
+        <div class="connection" id="raspberry-to-arduino">
+         <img src="{{ url_for('static', filename='images/dots.svg') }}" alt="M" class="connection-image" />
+            <img id="rpi-to-drone-nok" src="{{ url_for('static', filename='images/nolink.svg') }}" alt="M" class="connection-image" />
+            <img id="rpi-to-drone-ok"src="{{ url_for('static', filename='images/link.svg') }}" alt="M" class="connection-image" hidden/>
+             <img src="{{ url_for('static', filename='images/dots.svg') }}" alt="M" class="connection-image" />
+        </div>
+        <div class="device">
+            <img src="{{ url_for('static', filename='images/dronedji.svg') }}" alt="M" class="connection-image" />
+
+        </div>
+    </div>
+
 
         <div id="buttons">
 
