@@ -1,12 +1,12 @@
 # Drone-Payload
-UV projet de P1, par des FISE 2025 en CI3.
+UV projet de P1 en NU/IS, par des FISE 2025 en CI3.
 
 **Membres du groupe** :
 - Timothé KOBAK
 - Matis SPINELLI
 - Arthur MATA
 
-*Remarque* : Les différentes commandes présentes dans la documentation sont à exécuter sur un système Linux.
+**Remarque** : La documentation a été rédigée en partant du principe que toutes les commandes sont effectuées sur un système Ubuntu.
 
 ## Tags
 
@@ -66,7 +66,7 @@ The **MATRICE 600 PRO** drone serves as the aerial platform for this project.
 ## Communication Architecture
 
 
-![Alt text](doc/images/schema.png "Optional title")
+![Image du schéma fonctionnel général](doc/images/schema.png "Schéma fonctionnel général")
 
 
 ## Advantages
@@ -171,6 +171,8 @@ You can use a diagram like this to visualize the wiring:
 
 ### Other Connections:
 - Add any additional connections (e.g., sensors, LEDs) according to your project needs.
+
+--------------------------------
   
 ## Anciens repositories :
 - https://github.com/ceri-num/alpaga-rambouillet/

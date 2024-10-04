@@ -1,7 +1,8 @@
 #!/bin/python3
 
 import json
-from flask import Flask, render_template, request, flash, Response
+import os
+from flask import Flask, render_template, request, flash, Response , jsonify
 
 from digi.xbee.exception import TransmitException, InvalidOperatingModeException, TimeoutException
 from digi.xbee.devices import ZigBeeDevice, RemoteZigBeeDevice
@@ -83,3 +84,12 @@ def get_zb_data(timeout):
         flash("ERROR : Can't use XBee module...")
 
     return None
+
+@app.route('/check_wifi', methods=['GET'])
+def check_wifi():
+    client_ip = request.remote_addr
+    print(f"Client IP: {client_ip}")  #
+    # Assuming the RPi's network is on 10.3.141. subnet 
+    is_connected = client_ip.startswith("10.3.141.")
+    
+    return jsonify({"isConnected": is_connected})

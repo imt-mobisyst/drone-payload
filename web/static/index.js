@@ -86,28 +86,28 @@ function updateTimerDisplay(numTimer) {
 }
 
 function updateConnectionStatus() {
+    fetch("/check_wifi")
+        .then(response => response.json())
+        .then(data => {
+            const isPhoneConnectedToRaspberry = data.isConnected; // Backend response
 
-    const isPhoneConnectedToRaspberry = true; // Replace with actual logic
-    const isRaspberryConnectedToArduino = false; // Replace with actual logic
+            const phoneToRaspberryImgOk = document.getElementById('device-to-rpi-ok');
+            const phoneToRaspberryImgNok = document.getElementById('device-to-rpi-nok');
 
-    const phoneToRaspberryImgOk = document.getElementById('device-to-rpi-ok');
-    const phoneToRaspberryImgNok = document.getElementById('device-to-rpi-nok');
-
-    if (isPhoneConnectedToRaspberry) {
-
-        phoneToRaspberryImgNok.hidden=true;
-        phoneToRaspberryImgOk.hidden=false;
-    }
-
-    const raspberryToArduinoImgOk = document.getElementById('rpi-to-drone-ok');
-    const raspberryToArduinoImgNok = document.getElementById('rpi-to-drone-nok');
-
-    if (isRaspberryConnectedToArduino) {
-        raspberryToArduinoImgNok.hidden=true;
-        raspberryToArduinoImgOk.hidden=false;
-
-    } 
+            if (isPhoneConnectedToRaspberry) {
+                phoneToRaspberryImgNok.hidden = true;
+                phoneToRaspberryImgOk.hidden = false;
+            } else {
+                phoneToRaspberryImgNok.hidden = false;
+                phoneToRaspberryImgOk.hidden = true;
+            }
+        })
+        .catch(error => console.error('Error checking Wi-Fi connection:', error));
 }
+
+setInterval(updateConnectionStatus, 5000); 
+
+
 
 
 
