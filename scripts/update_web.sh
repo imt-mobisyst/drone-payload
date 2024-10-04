@@ -16,7 +16,7 @@ Help()
 
 # IP addresses
 IP_RPI="10.3.141.1"
-IP_IOT="10.89.2.1"
+IP_IOT="10.89.2.55"
 
 ip_target=$IP_IOT
 

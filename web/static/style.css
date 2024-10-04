@@ -336,3 +336,32 @@ input:checked+.slider:before {
         width: 100%;
     }
 }
+
+.connection-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.device {
+    
+    align-items: center;
+    margin: 0 20px;
+
+}
+
+.connection {
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.connection-image {
+    width: 50px;
+    height: 50px;
+
+}

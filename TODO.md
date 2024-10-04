@@ -2,14 +2,10 @@
 
 This document outlines the remaining tasks that need to be completed before the project can be considered finished. 
 
-
-
-
-
 ### 
 - [ ] **Payload Structure**: Design and print the 3D payload structure for the cannister and the electronics
-- [ ] **Purchase one battery**: Battery for the RSPI station
-- [ ] **Box**: Box for the mobile RSPI station 
+- [ ] **Purchase one battery**: Battery for the RPI station
+- [ ] **Box**: Box for the mobile RPI station 
 
 
 ### Equipment to Duplicate for Safety

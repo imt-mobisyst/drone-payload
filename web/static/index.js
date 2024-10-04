@@ -85,3 +85,29 @@ function updateTimerDisplay(numTimer) {
     updateTimer.textContent = seconds[numTimer] > 9 ? seconds[numTimer] : "0" + seconds[numTimer];
 }
 
+function updateConnectionStatus() {
+
+    const isPhoneConnectedToRaspberry = true; // Replace with actual logic
+    const isRaspberryConnectedToArduino = false; // Replace with actual logic
+
+    const phoneToRaspberryImgOk = document.getElementById('device-to-rpi-ok');
+    const phoneToRaspberryImgNok = document.getElementById('device-to-rpi-nok');
+
+    if (isPhoneConnectedToRaspberry) {
+
+        phoneToRaspberryImgNok.hidden=true;
+        phoneToRaspberryImgOk.hidden=false;
+    }
+
+    const raspberryToArduinoImgOk = document.getElementById('rpi-to-drone-ok');
+    const raspberryToArduinoImgNok = document.getElementById('rpi-to-drone-nok');
+
+    if (isRaspberryConnectedToArduino) {
+        raspberryToArduinoImgNok.hidden=true;
+        raspberryToArduinoImgOk.hidden=false;
+
+    } 
+}
+
+
+
