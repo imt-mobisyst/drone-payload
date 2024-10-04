@@ -2,15 +2,18 @@
 
 import json
 from flask import Flask, render_template, request, flash, Response
-
 from digi.xbee.exception import TransmitException, InvalidOperatingModeException, TimeoutException
 from digi.xbee.devices import ZigBeeDevice, RemoteZigBeeDevice
 from digi.xbee.models.address import XBee64BitAddress
 
-valves = {
-    "v1": {"is_open": False},
-    "v2": {"is_open": False}
-}
+with open('static/config.json', 'r') as file:
+    config = json.load(file)["config"]
+    file.close()
+
+nb_valves = config['nb_valves']
+
+valves = [{"is_open": False} for _ in range(nb_valves)]
+# Voir si valve n°2 est ouverte : valves[1]["is_open"]
 
 app = Flask(__name__)
 
@@ -25,15 +28,10 @@ device.flush_queues()
 def index():
     if request.method == "POST": 
         # Note : Relay is active low
-        if request.json is not None and \
-        request.json["valve_nb"] is not None and \
-        request.json["open"] is not None:
-            pin = request.json["valve_nb"][1] # "1" or "2"
-
-            if(request.json["open"] == True):
-                data = "O" + str(pin)
-            else:
-                data = "C" + str(pin)
+        if (request.json is not None) and (request.json["valve_nb"] is not None) and (request.json["open"] is not None):
+            valve_nb = request.json["valve_nb"][1]
+            open = request.json["open"]
+            data = ("O" if open else "C") + str(valve_nb)
 
             send_zb_data(data)
 
@@ -41,8 +39,9 @@ def index():
             if xbee_message is not None:
                 xbee_message = xbee_message.data.decode()
 
-                valves[request.json["valve_nb"]]["is_open"] = \
-                    True if xbee_message[1] == "O" else False
+                print("Xbee vxbee_vaalve", xbee_message)
+                xbee_open = xbee_message[1] == "O"
+                valves[int(valve_nb)]["is_open"] = xbee_open
 
             else:
                 flash("Error, no response from Drone...")
@@ -54,7 +53,7 @@ def index():
             return Response(status = 500)
     
     else:
-        return render_template('index.html.jinja', valves=valves) 
+        return render_template('index.html.jinja', valves=valves, nb_valves=nb_valves)
 
 
 def send_zb_data(data):
