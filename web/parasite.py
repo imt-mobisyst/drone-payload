@@ -14,7 +14,7 @@ with open('static/config.json', 'r') as file:
 nb_valves = config['nb_valves']
 
 valves = [{"is_open": False} for _ in range(nb_valves)]
-# Voir si valve n°2 est ouverte : valves[1]["is_open"]
+# E.g. : Voir si valve n°2 est ouverte : valves[1]["is_open"]
 
 app = Flask(__name__)
 
@@ -30,7 +30,7 @@ def index():
     if request.method == "POST": 
         # Note : Relay is active low
         if (request.json is not None) and (request.json["valve_nb"] is not None) and (request.json["open"] is not None):
-            valve_nb = request.json["valve_nb"][1]
+            valve_nb = int(request.json["valve_nb"][1])
             open = request.json["open"]
             data = ("O" if open else "C") + str(valve_nb)
 
@@ -40,17 +40,16 @@ def index():
             if xbee_message is not None:
                 xbee_message = xbee_message.data.decode()
 
-                print("Xbee vxbee_vaalve", xbee_message)
                 xbee_open = xbee_message[1] == "O"
-                valves[int(valve_nb)]["is_open"] = xbee_open
+                valves[valve_nb - 1]["is_open"] = xbee_open
 
             else:
-                print("Error, no response from Drone...")
+                print("ERROR : no response from Drone...")
 
             return json.dumps(valves)
 
         else:
-            print("Error, try again...")
+            print("ERROR : try again...")
             return Response(status = 500)
     
     else:

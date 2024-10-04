@@ -53,7 +53,7 @@
             <div class="button-section">
                 <div class="button-line">
                     {% if valve["is_open"] %}
-                    <a id="{{'valve-v' ~ (loop.index-1)}}" class="valve" style="background-color: var(--green-color);">
+                    <a id="{{'valve-v' ~ (loop.index)}}" class="valve" style="background-color: var(--green-color);">
                         <div style="margin-top: 100%"></div>
                         <div
                             style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
@@ -62,12 +62,12 @@
                         </div>
                     </a>
                     <label class="switch">
-                        <input type="checkbox" id="{{'v' ~ (loop.index-1)}}" onchange="confirmAction(this.id)"
+                        <input type="checkbox" id="{{'v' ~ (loop.index)}}" onchange="confirmAction(this.id)"
                             checked />
                         <span class="slider round"></span>
                     </label>
                     {% else %}
-                    <a id="{{'valve-v' ~ (loop.index-1)}}" class="valve">
+                    <a id="{{'valve-v' ~ (loop.index)}}" class="valve">
                         <div style="margin-top: 100%"></div>
                         <div
                             style="align-items: center; display: flex; flex-direction: column; transform: rotate(-45deg)">
@@ -76,7 +76,7 @@
                         </div>
                     </a>
                     <label class="switch">
-                        <input type="checkbox" id="{{'v' ~ (loop.index-1)}}" onchange="confirmAction(this.id)" />
+                        <input type="checkbox" id="{{'v' ~ (loop.index)}}" onchange="confirmAction(this.id)" />
                         <span class="slider round"></span>
                     </label>
                     {% endif %}
@@ -84,9 +84,9 @@
                 <div class="button-line">
                     <div class="timer-label">
                         <p style="white-space: nowrap;">Chrono :</p>
-                        <span class="timer" id="{{'timer' ~ (loop.index-1)}}">00</span>
+                        <span class="timer" id="{{'timer' ~ (loop.index)}}">00</span>
                     </div>
-                    <a class="bouton reset" href="#" onclick="resetTimer(0); return false;">
+                    <a class="bouton reset" href="#" onclick="resetTimer({{ loop.index }}); return false;">
                         <img src="{{ url_for('static', filename='images/refresh.svg') }}" style="width:30px;:red;" />
                     </a>
                 </div>
