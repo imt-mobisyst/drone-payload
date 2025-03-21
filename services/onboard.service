@@ -1,0 +1,13 @@
+[Unit]
+Description=Start onbooard_api on start of Raspberry Pi
+After=network.target
+
+[Service]
+ExecStart=/home/bot/flask_app_2/.venvs/drone/bin/python3 /home/bot/flask_app_2/onboard_api.py
+WorkingDirectory=/home/bot
+Restart=always
+User=bot
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

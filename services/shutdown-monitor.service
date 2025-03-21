@@ -1,0 +1,13 @@
+[Unit]
+Description=Shutdown Raspberry Pi when GPIO pins are connected
+After=network.target
+
+[Service]
+ExecStart=/home/a/flask_app/.venvs/sol/bin/python3 /home/a/flask_app/shutdown.py
+WorkingDirectory=/home/a
+Restart=always
+User=a
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

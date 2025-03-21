@@ -1,0 +1,13 @@
+[Unit]
+Description=Start ground_api on start of Raspberry Pi
+After=network.target
+
+[Service]
+ExecStart=/home/a/flask_app_2/.venvs/sol/bin/python3 /home/a/flask_app_2/ground_api.py
+WorkingDirectory=/home/a
+Restart=always
+User=a
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

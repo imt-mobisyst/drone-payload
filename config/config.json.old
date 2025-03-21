@@ -1,0 +1,10 @@
+{
+    "config": {
+        "nb_valves": 3
+    },
+    "timers": {
+        "valve_v1": 8,
+        "valve_v2": 10,
+        "valve_v3": 10
+    }
+}
